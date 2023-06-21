@@ -1,19 +1,34 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Index('pk_companyleads', ['id'], { unique: true })
+@Entity('companyleads', { schema: 'public' })
 export class CompanyLead {
-  @PrimaryGeneratedColumn()
-  id: number;
 
-  @Column()
+  @Column('character varying', { 
+    name: 'name', 
+    length: 255, 
+    nullable: false 
+  })
   name: string;
 
-  @Column()
+  @Column('character varying', {
+    name: 'structure',
+    length: 20,
+    nullable: false,
+  })
   structure: string;
 
-  @Column()
+  @Column('character varying', {
+    name: 'customerName',
+    length: 255,
+    nullable: false,
+  })
   customerName: string;
 
-  @Column()
+  @Column('character varying', {
+    name: 'customerEmail',
+    length: 200,
+    nullable: false,
+  })
   customerEmail: string;
 }
