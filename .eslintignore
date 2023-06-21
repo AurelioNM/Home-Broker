@@ -1,0 +1,7 @@
+/*.js
+node_modules
+dist
+src/migrations/scripts
+output
+test/coverage
+coverage
