@@ -14,7 +14,7 @@ export class CompanyLeadService {
     return this.companyLeadRepository.find();
   }
 
-  async findOne(id: number): Promise<CompanyLead> {
+  async findOne(id: string): Promise<CompanyLead> {
     return this.companyLeadRepository.findOne({ where: { id } });
   }
 
@@ -24,7 +24,7 @@ export class CompanyLeadService {
   }
 
   async update(
-    id: number,
+    id: string,
     companyLead: Partial<CompanyLead>,
   ): Promise<CompanyLead> {
     await this.companyLeadRepository.update(id, companyLead);

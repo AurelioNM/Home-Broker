@@ -1,13 +1,13 @@
+import { BaseEntity } from 'src/common/entities/base.entity';
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 @Index('pk_companyleads', ['id'], { unique: true })
 @Entity('companyleads', { schema: 'public' })
-export class CompanyLead {
-
-  @Column('character varying', { 
-    name: 'name', 
-    length: 255, 
-    nullable: false 
+export class CompanyLead extends BaseEntity {
+  @Column('character varying', {
+    name: 'name',
+    length: 255,
+    nullable: false,
   })
   name: string;
 
