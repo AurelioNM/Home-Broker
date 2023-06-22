@@ -4,21 +4,23 @@ import { AppService } from './app.service';
 import { CompanyLeadModule } from './company-lead/company-lead.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import typeormConfig from './config/typeorm.config';
+import typeOrmConfigTest from './config/typeorm-config-test';
+import typeOrmConfig from './config/typeorm.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    CompanyLeadModule,
-    TypeOrmModule.forRoot({
-      type: process.env.DB_TYPE as any,
-      host: process.env.PG_HOST,
-      port: parseInt(process.env.PG_PORT),
-      username: process.env.PG_USER,
-      password: process.env.PG_PASSWORD,
-      database: process.env.PG_DB,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: false,
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+      load: [
+        process.env.NODE_ENV === 'test' ? typeOrmConfigTest : typeOrmConfig,
+      ],
     }),
+    CompanyLeadModule,
+    TypeOrmModule.forRoot(
+      process.env.NODE_ENV === 'test' ? typeOrmConfigTest() : typeormConfig(),
+    ),
   ],
   controllers: [AppController],
   providers: [AppService],

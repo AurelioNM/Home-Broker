@@ -2,7 +2,7 @@ import { BaseEntity } from 'src/common/entities/base.entity';
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 @Index('pk_companyleads', ['id'], { unique: true })
-@Entity('companyleads', { schema: 'public' })
+@Entity('company_leads', { schema: 'public' })
 export class CompanyLead extends BaseEntity {
   @Column('character varying', {
     name: 'name',
@@ -19,14 +19,14 @@ export class CompanyLead extends BaseEntity {
   structure: string;
 
   @Column('character varying', {
-    name: 'customerName',
+    name: 'customer_name',
     length: 255,
     nullable: false,
   })
   customerName: string;
 
   @Column('character varying', {
-    name: 'customerEmail',
+    name: 'customer_email',
     length: 200,
     nullable: false,
   })
