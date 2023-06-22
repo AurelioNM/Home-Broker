@@ -21,7 +21,7 @@ export class CompanyLeadController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<CompanyLead> {
+  async findOne(@Param('id') id: string): Promise<CompanyLead> {
     const companyLead = await this.companyLeadService.findOne(id);
     if (!companyLead) {
       throw new NotFoundException('Company Lead does not exist!');
@@ -37,14 +37,14 @@ export class CompanyLeadController {
 
   @Put(':id')
   async update(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() companyLead: CompanyLead,
   ): Promise<any> {
     return this.companyLeadService.update(id, companyLead);
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: number): Promise<any> {
+  async delete(@Param('id') id: string): Promise<any> {
     const companyLead = await this.companyLeadService.findOne(id);
     if (!companyLead) {
       throw new NotFoundException('Company Lead does not exist!');

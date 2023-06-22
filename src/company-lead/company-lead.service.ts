@@ -31,7 +31,7 @@ export class CompanyLeadService {
     return this.companyLeadRepository.findOne({ where: { id } });
   }
 
-  async delete(id: number): Promise<void> {
+  async delete(id: string): Promise<void> {
     await this.companyLeadRepository.delete(id);
   }
 }
