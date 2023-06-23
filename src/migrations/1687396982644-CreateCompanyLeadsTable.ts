@@ -14,7 +14,7 @@ export class CreateCompanyLeadsTable1687396982644
         customer_email varchar(200) NOT NULL,
         createddate timestamp with time zone NOT NULL,
         updateddate timestamp with time zone,
-        deleteddate timestamp with time zone,
+        deleteddate timestamp with time zone
       );
     `);
   }
