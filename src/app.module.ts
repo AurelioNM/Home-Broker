@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { CompanyLeadModule } from './company-lead/company-lead.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import typeormConfig from './config/typeorm.config';
 import typeOrmConfigTest from './config/typeorm-config-test';
 import typeOrmConfig from './config/typeorm.config';
 
@@ -19,7 +18,7 @@ import typeOrmConfig from './config/typeorm.config';
     }),
     CompanyLeadModule,
     TypeOrmModule.forRoot(
-      process.env.NODE_ENV === 'test' ? typeOrmConfigTest() : typeormConfig(),
+      process.env.NODE_ENV === 'test' ? typeOrmConfigTest() : typeOrmConfig(),
     ),
   ],
   controllers: [AppController],

@@ -15,6 +15,8 @@ services:
       - PG_HOST=db
     depends_on:
       - db
+    networks:
+      - study-project-network
     volumes:
       - ./:/app
   db:
@@ -26,7 +28,12 @@ services:
       POSTGRES_DB: postgres
     ports:
       - '5433:5432'
+    networks:
+      - study-project-network
     volumes:
       - pgdata:/var/lib/postgresql/data
 volumes:
   pgdata: {}
+networks:
+  study-project-network:
+    driver: bridge
