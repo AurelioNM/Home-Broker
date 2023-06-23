@@ -12,10 +12,14 @@ import typeOrmConfig from './config/typeorm.config';
     ConfigModule.forRoot({
       envFilePath: '.env',
       isGlobal: true,
-      load: [typeOrmConfig],
+      load: [
+        process.env.NODE_ENV === 'test' ? typeOrmConfigTest : typeOrmConfig,
+      ],
     }),
-    TypeOrmModule.forRoot(typeOrmConfig()),
     CompanyLeadModule,
+    TypeOrmModule.forRoot(
+      process.env.NODE_ENV === 'test' ? typeOrmConfigTest() : typeOrmConfig(),
+    ),
   ],
   controllers: [AppController],
   providers: [AppService],
