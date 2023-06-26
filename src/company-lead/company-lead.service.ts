@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyLead } from './company-lead.entity';
 import { Repository } from 'typeorm';
+import { CompanyLeadDto } from './dto/company-lead-dto';
 
 @Injectable()
 export class CompanyLeadService {
@@ -10,25 +11,35 @@ export class CompanyLeadService {
     private companyLeadRepository: Repository<CompanyLead>,
   ) {}
 
-  async findAll(): Promise<CompanyLead[]> {
-    return this.companyLeadRepository.find();
+  async findAll(): Promise<CompanyLeadDto> {
+    const companyLeads = await this.companyLeadRepository.find();
+    return CompanyLeadDto.factory(CompanyLeadDto, companyLeads);
   }
 
-  async findOne(id: string): Promise<CompanyLead> {
-    return this.companyLeadRepository.findOne({ where: { id } });
+  async findOne(id: string): Promise<CompanyLeadDto> {
+    const companyLead = await this.companyLeadRepository.findOne({
+      where: { id },
+    });
+    return CompanyLeadDto.factory(CompanyLeadDto, companyLead);
   }
 
-  async create(companyLead: Partial<CompanyLead>): Promise<CompanyLead> {
-    const newCompanyLead = this.companyLeadRepository.create(companyLead);
-    return this.companyLeadRepository.save(newCompanyLead);
+  async create(
+    companyLeadDto: Partial<CompanyLeadDto>,
+  ): Promise<CompanyLeadDto> {
+    const newCompanyLead = this.companyLeadRepository.create(companyLeadDto);
+    const companyLead = await this.companyLeadRepository.save(newCompanyLead);
+    return CompanyLeadDto.factory(CompanyLeadDto, companyLead);
   }
 
   async update(
     id: string,
-    companyLead: Partial<CompanyLead>,
-  ): Promise<CompanyLead> {
-    await this.companyLeadRepository.update(id, companyLead);
-    return this.companyLeadRepository.findOne({ where: { id } });
+    companyLeadDto: Partial<CompanyLead>,
+  ): Promise<CompanyLeadDto> {
+    await this.companyLeadRepository.update(id, companyLeadDto);
+    const companyLeadUpdated = await this.companyLeadRepository.findOne({
+      where: { id },
+    });
+    return CompanyLeadDto.factory(CompanyLeadDto, companyLeadUpdated);
   }
 
   async delete(id: string): Promise<void> {
