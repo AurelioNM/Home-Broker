@@ -30,14 +30,14 @@ export class BaseEntity extends TypeOrmBaseEntity {
   createddate = new Date(new Date().toUTCString());
 
   @UpdateDateColumn({
-    name: 'updatedate',
+    name: 'updateddate',
     nullable: true,
     type: 'time with time zone',
   })
   updateddate?: Date;
 
   @DeleteDateColumn({
-    name: 'deletedate',
+    name: 'deleteddate',
     nullable: true,
     type: 'time with time zone',
   })
