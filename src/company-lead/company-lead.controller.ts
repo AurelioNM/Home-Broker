@@ -10,18 +10,19 @@ import {
 } from '@nestjs/common';
 import { CompanyLeadService } from './company-lead.service';
 import { CompanyLead } from './company-lead.entity';
+import { CompanyLeadDto } from './dto/company-lead-dto';
 
 @Controller('company-lead')
 export class CompanyLeadController {
   constructor(private readonly companyLeadService: CompanyLeadService) {}
 
   @Get()
-  async findAll(): Promise<CompanyLead[]> {
+  async findAll(): Promise<CompanyLeadDto> {
     return this.companyLeadService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<CompanyLead> {
+  async findOne(@Param('id') id: string): Promise<CompanyLeadDto> {
     const companyLead = await this.companyLeadService.findOne(id);
     if (!companyLead) {
       throw new NotFoundException('Company Lead does not exist!');
@@ -31,16 +32,18 @@ export class CompanyLeadController {
   }
 
   @Post()
-  async create(@Body() companyLead: CompanyLead): Promise<CompanyLead> {
-    return this.companyLeadService.create(companyLead);
+  async create(
+    @Body() companyLeadDto: CompanyLeadDto,
+  ): Promise<CompanyLeadDto> {
+    return this.companyLeadService.create(companyLeadDto);
   }
 
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() companyLead: CompanyLead,
-  ): Promise<any> {
-    return this.companyLeadService.update(id, companyLead);
+    @Body() companyLeadDto: CompanyLeadDto,
+  ): Promise<CompanyLeadDto> {
+    return this.companyLeadService.update(id, companyLeadDto);
   }
 
   @Delete(':id')
