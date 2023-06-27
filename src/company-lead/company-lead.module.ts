@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { CompanyLeadController } from './company-lead.controller';
-import { CompanyLeadService } from './company-lead.service';
+import { CompanyLeadService } from './services/company-lead.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CompanyLead } from './company-lead.entity';
+import { CompanyLead } from './entities/company-lead.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([CompanyLead])],

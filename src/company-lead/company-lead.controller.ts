@@ -8,8 +8,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CompanyLeadService } from './company-lead.service';
-import { CompanyLead } from './company-lead.entity';
+import { CompanyLeadService } from './services/company-lead.service';
 import { CompanyLeadDto } from './dto/company-lead-dto';
 
 @Controller('company-lead')
@@ -35,6 +34,7 @@ export class CompanyLeadController {
   async create(
     @Body() companyLeadDto: CompanyLeadDto,
   ): Promise<CompanyLeadDto> {
+    console.log("Post controller route");
     return this.companyLeadService.create(companyLeadDto);
   }
 

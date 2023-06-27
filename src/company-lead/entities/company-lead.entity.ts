@@ -1,4 +1,4 @@
-import { BaseEntity } from '../common/entities/base.entity';
+import { BaseEntity } from '../../common/entities/base.entity';
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 @Index('pk_companyleads', ['id'], { unique: true })
@@ -8,6 +8,7 @@ export class CompanyLead extends BaseEntity {
     name: 'name',
     length: 255,
     nullable: false,
+    unique: true,
   })
   name: string;
 
