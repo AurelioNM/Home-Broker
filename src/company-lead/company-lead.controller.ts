@@ -34,7 +34,6 @@ export class CompanyLeadController {
   async create(
     @Body() companyLeadDto: CompanyLeadDto,
   ): Promise<CompanyLeadDto> {
-    console.log("Post controller route");
     return this.companyLeadService.create(companyLeadDto);
   }
 
