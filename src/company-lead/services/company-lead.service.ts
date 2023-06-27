@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyLead } from '../entities/company-lead.entity';
 import { Repository } from 'typeorm';
@@ -12,6 +12,8 @@ export class CompanyLeadService {
     @InjectRepository(CompanyLead)
     private companyLeadRepository: Repository<CompanyLead>,
   ) {}
+
+  private readonly logger = new Logger(CompanyLeadService.name)
 
   async findAll(): Promise<CompanyLeadDto> {
     try {
@@ -27,7 +29,6 @@ export class CompanyLeadService {
       const companyLead = await this.companyLeadRepository.findOne({
         where: { id },
       });
-      console.log(CompanyLeadDto.factory(CompanyLeadDto, companyLead).constructor.name);
       return CompanyLeadDto.factory(CompanyLeadDto, companyLead) as CompanyLeadDto;
     } catch(error) {
 
@@ -40,10 +41,10 @@ export class CompanyLeadService {
     try {
       const newCompanyLead = this.companyLeadRepository.create(companyLeadDto);
       const companyLead = await this.companyLeadRepository.save(newCompanyLead);
+      this.logger.log("CompanyLead created");
       return CompanyLeadDto.factory(CompanyLeadDto, companyLead);
     } catch(error) {
-      console.log("Create CompanyLead Exception => " + error);
-      throw error;
+
     }
   }
 
