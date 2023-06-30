@@ -1,6 +1,4 @@
-import { Exclude, classToClass, plainToClass } from 'class-transformer';
-import { ClassType } from 'class-transformer/ClassTransformer';
-import { Options } from 'nodemailer/lib/dkim';
+import { Exclude } from 'class-transformer';
 
 export abstract class BaseDto {
   id?: string;
@@ -15,28 +13,4 @@ export abstract class BaseDto {
 
   @Exclude()
   deleteddate?: Date;
-
-  public static factory<T, R>(
-    ResponseDto: ClassType<T>,
-    plainResponseData: R,
-    options?: Options,
-  ): T {
-    const updatedResponseData = plainToClass<T, R>(
-      ResponseDto,
-      plainResponseData,
-      {
-        ignoreDecorators: true,
-      },
-    );
-
-    if (options) {
-      return classToClass(updatedResponseData, {
-        ...options,
-        excludeExtraneousValues: true,
-      });
-    }
-    return classToClass(updatedResponseData, {
-      excludeExtraneousValues: true,
-    });
-  }
 }

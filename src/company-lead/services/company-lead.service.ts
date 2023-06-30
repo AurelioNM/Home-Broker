@@ -3,8 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyLead } from '../entities/company-lead.entity';
 import { Repository } from 'typeorm';
 import { CompanyLeadDto } from '../dto/company-lead-dto';
-import { log } from 'console';
-import { CpuInfo } from 'os';
 
 @Injectable()
 export class CompanyLeadService {
