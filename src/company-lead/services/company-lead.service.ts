@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyLead } from '../entities/company-lead.entity';
 import { Repository } from 'typeorm';
 import { CompanyLeadDto } from '../dto/company-lead-dto';
+import { Response } from '~/common/factory-response';
 
 @Injectable()
 export class CompanyLeadService {
@@ -16,7 +17,7 @@ export class CompanyLeadService {
   async findAll(): Promise<CompanyLeadDto> {
     try {
       const companyLeads = await this.companyLeadRepository.find();
-      return CompanyLeadDto.factory(CompanyLeadDto, companyLeads);
+      return Response.factory(CompanyLeadDto, companyLeads);
     } catch(error) {
 
     }
@@ -27,7 +28,7 @@ export class CompanyLeadService {
       const companyLead = await this.companyLeadRepository.findOne({
         where: { id },
       });
-      return CompanyLeadDto.factory(CompanyLeadDto, companyLead) as CompanyLeadDto;
+      return Response.factory(CompanyLeadDto, companyLead) as CompanyLeadDto;
     } catch(error) {
 
     }
@@ -40,7 +41,7 @@ export class CompanyLeadService {
       const newCompanyLead = this.companyLeadRepository.create(companyLeadDto);
       const companyLead = await this.companyLeadRepository.save(newCompanyLead);
       this.logger.log("CompanyLead created");
-      return CompanyLeadDto.factory(CompanyLeadDto, companyLead);
+      return Response.factory(CompanyLeadDto, companyLead);
     } catch(error) {
 
     }
@@ -55,7 +56,7 @@ export class CompanyLeadService {
       const companyLeadUpdated = await this.companyLeadRepository.findOne({
         where: { id },
       });
-      return CompanyLeadDto.factory(CompanyLeadDto, companyLeadUpdated);
+      return Response.factory(CompanyLeadDto, companyLeadUpdated);
     } catch(error) {
 
     }

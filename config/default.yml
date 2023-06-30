@@ -1,8 +1,8 @@
 db:
   type: 'postgres'
-  host: 'db'
-  port: 5432
-  database: 'postgres'
-  username: 'postgres'
-  password: 'postgres'
+  host: 'localhost'
+  port: 5440
+  database: 'nest'
+  username: 'nest'
+  password: 'nest'
   synchronize: false
