@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CompanyLeadService } from './company-lead.service';
+import { CompanyLeadService } from '../../src/company-lead/services/company-lead.service';
 
 describe('CompanyLeadService', () => {
   let service: CompanyLeadService;
