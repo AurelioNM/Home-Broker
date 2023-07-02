@@ -1,9 +1,13 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyLead } from '../entities/company-lead.entity';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { CompanyLeadDto } from '../dto/company-lead-dto';
-import { Response } from '~/utils-common/factory-response';
 import { CompanyLeadExceptionEnum } from '../exceptions/company-lead.exceptions';
 
 @Injectable()
@@ -15,50 +19,39 @@ export class CompanyLeadService {
 
   private readonly logger = new Logger(CompanyLeadService.name);
 
-  async findAll(): Promise<CompanyLeadDto> {
-    const companyLeads = await this.companyLeadRepository.find();
-    return Response.factory(CompanyLeadDto, companyLeads);
+  async findAll(): Promise<CompanyLead[]> {
+    return this.companyLeadRepository.find();
   }
 
-  async findOne(id: string): Promise<CompanyLeadDto> {
-    const companyLead = await this.companyLeadRepository.findOne({
-      where: { id },
-    });
-
-    return Response.factory(CompanyLeadDto, companyLead) as CompanyLeadDto;
+  async findOne(id: string): Promise<CompanyLead> {
+    const companyLead = await this.companyLeadRepository.findOneBy({ id });
+    if (!companyLead) {
+      throw new NotFoundException(
+        CompanyLeadExceptionEnum.COMPANY_LEAD_NOT_FOUND,
+      );
+    }
+    return companyLead;
   }
 
-  async create(
-    companyLeadDto: Partial<CompanyLeadDto>,
-  ): Promise<CompanyLeadDto> {
-    const companyLead = await this.companyLeadRepository.findOne({
-      where: { name: companyLeadDto.name },
+  async create(companyLeadDto: Partial<CompanyLeadDto>): Promise<CompanyLead> {
+    const companyLead = await this.companyLeadRepository.findOneBy({
+      name: companyLeadDto.name,
     });
     if (companyLead) {
       throw new BadRequestException(
-        CompanyLeadExceptionEnum.USER_ALREADY_EXIST,
+        CompanyLeadExceptionEnum.COMPANY_LEAD_ALREADY_EXIST,
       );
     }
 
     const companyLeadEntity = this.companyLeadRepository.create(companyLeadDto);
-    const companyLeadSaved = await this.companyLeadRepository.save(
-      companyLeadEntity,
-    );
-    this.logger.log('CompanyLead created: ', companyLeadSaved.name);
-
-    return Response.factory(CompanyLeadDto, companyLead) as CompanyLeadDto;
+    return await this.companyLeadRepository.save(companyLeadEntity);
   }
 
   async update(
     id: string,
     companyLeadDto: Partial<CompanyLead>,
-  ): Promise<CompanyLeadDto> {
-    await this.companyLeadRepository.update(id, companyLeadDto);
-    const companyLeadUpdated = await this.companyLeadRepository.findOne({
-      where: { id },
-    });
-
-    return Response.factory(CompanyLeadDto, companyLeadUpdated);
+  ): Promise<UpdateResult> {
+    return await this.companyLeadRepository.update(id, companyLeadDto);
   }
 
   async delete(id: string): Promise<void> {
