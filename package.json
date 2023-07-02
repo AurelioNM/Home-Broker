@@ -25,10 +25,11 @@
     "migration-dev:run": "NODE_ENV=development yarn typeorm migration:run",
     "migration-dev:revert": "NODE_ENV=development yarn typeorm migration:revert",
     "migration-dev:create": "NODE_ENV=development yarn typeorm migration:create --name",
-    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config src/config/typeorm.config.command.ts"
+    "typeorm": "typeorm-ts-node-commonjs -d src/config/typeorm-execute-migration.config.command.ts"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "2.2.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.3.10",
     "@nestjs/platform-fastify": "^9.3.10",
@@ -43,7 +44,7 @@
     "pg": "8.7.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
-    "typeorm": "0.2.45"
+    "typeorm": "0.3.7"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",

@@ -1,3 +1,7 @@
+server:
+  port: 3005
+  origin: '*'
+
 db:
   type: 'postgres'
   host: 'localhost'
