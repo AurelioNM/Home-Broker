@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
+import { AllExceptionsFilter } from './utils-common/exceptions/all-exceptions-filter';
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -23,6 +24,7 @@ async function bootstrap() {
   );
 
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   await app
     .listen(3003)

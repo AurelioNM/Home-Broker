@@ -1,9 +1,10 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyLead } from '../entities/company-lead.entity';
 import { Repository } from 'typeorm';
 import { CompanyLeadDto } from '../dto/company-lead-dto';
 import { Response } from '~/utils-common/factory-response';
+import { CompanyLeadExceptionEnum } from '../exceptions/company-lead.exceptions';
 
 @Injectable()
 export class CompanyLeadService {
@@ -15,51 +16,52 @@ export class CompanyLeadService {
   private readonly logger = new Logger(CompanyLeadService.name);
 
   async findAll(): Promise<CompanyLeadDto> {
-    try {
-      const companyLeads = await this.companyLeadRepository.find();
-      return Response.factory(CompanyLeadDto, companyLeads);
-    } catch (error) {}
+    const companyLeads = await this.companyLeadRepository.find();
+    return Response.factory(CompanyLeadDto, companyLeads);
   }
 
   async findOne(id: string): Promise<CompanyLeadDto> {
-    try {
-      const companyLead = await this.companyLeadRepository.findOne({
-        where: { id },
-      });
+    const companyLead = await this.companyLeadRepository.findOne({
+      where: { id },
+    });
 
-      return Response.factory(CompanyLeadDto, companyLead) as CompanyLeadDto;
-    } catch (error) {}
+    return Response.factory(CompanyLeadDto, companyLead) as CompanyLeadDto;
   }
 
   async create(
     companyLeadDto: Partial<CompanyLeadDto>,
   ): Promise<CompanyLeadDto> {
-    try {
-      const newCompanyLead = this.companyLeadRepository.create(companyLeadDto);
-      const companyLead = await this.companyLeadRepository.save(newCompanyLead);
-      this.logger.log('CompanyLead created');
+    const companyLead = await this.companyLeadRepository.findOne({
+      where: { name: companyLeadDto.name },
+    });
+    if (companyLead) {
+      throw new BadRequestException(
+        CompanyLeadExceptionEnum.USER_ALREADY_EXIST,
+      );
+    }
 
-      return Response.factory(CompanyLeadDto, companyLead) as CompanyLeadDto;
-    } catch (error) {}
+    const companyLeadEntity = this.companyLeadRepository.create(companyLeadDto);
+    const companyLeadSaved = await this.companyLeadRepository.save(
+      companyLeadEntity,
+    );
+    this.logger.log('CompanyLead created: ', companyLeadSaved.name);
+
+    return Response.factory(CompanyLeadDto, companyLead) as CompanyLeadDto;
   }
 
   async update(
     id: string,
     companyLeadDto: Partial<CompanyLead>,
   ): Promise<CompanyLeadDto> {
-    try {
-      await this.companyLeadRepository.update(id, companyLeadDto);
-      const companyLeadUpdated = await this.companyLeadRepository.findOne({
-        where: { id },
-      });
+    await this.companyLeadRepository.update(id, companyLeadDto);
+    const companyLeadUpdated = await this.companyLeadRepository.findOne({
+      where: { id },
+    });
 
-      return Response.factory(CompanyLeadDto, companyLeadUpdated);
-    } catch (error) {}
+    return Response.factory(CompanyLeadDto, companyLeadUpdated);
   }
 
   async delete(id: string): Promise<void> {
-    try {
-      await this.companyLeadRepository.delete(id);
-    } catch (error) {}
+    await this.companyLeadRepository.delete(id);
   }
 }
