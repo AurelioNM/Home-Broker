@@ -7,7 +7,7 @@ import {
   BaseEntity as TypeOrmBaseEntity,
   UpdateDateColumn,
 } from 'typeorm';
-import { generateUUID } from '../utils';
+import { generateUUID } from '../uuid';
 
 export class BaseEntity extends TypeOrmBaseEntity {
   @PrimaryColumn('uuid', {

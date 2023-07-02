@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CompanyLeadController } from './company-lead.controller';
+import { CompanyLeadController } from '../../src/company-lead/api/company-lead.controller';
 
 describe('CompanyLeadController', () => {
   let controller: CompanyLeadController;

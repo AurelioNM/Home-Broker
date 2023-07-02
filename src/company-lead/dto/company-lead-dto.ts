@@ -1,12 +1,8 @@
 import { Expose } from 'class-transformer';
-import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
-import { BaseDto } from '~/common/dto/base-dto';
+import { IsNotEmpty, IsString } from 'class-validator';
+import { BaseDto } from '~/utils-common/dto/base-dto';
 
 export class CompanyLeadDto extends BaseDto {
-  @Expose()
-  @IsUUID()
-  id: string;
-
   @Expose()
   @IsNotEmpty()
   @IsString()

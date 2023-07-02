@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyLead } from '../entities/company-lead.entity';
 import { Repository } from 'typeorm';
 import { CompanyLeadDto } from '../dto/company-lead-dto';
-import { Response } from '~/common/factory-response';
+import { Response } from '~/utils-common/factory-response';
 
 @Injectable()
 export class CompanyLeadService {
@@ -12,15 +12,13 @@ export class CompanyLeadService {
     private companyLeadRepository: Repository<CompanyLead>,
   ) {}
 
-  private readonly logger = new Logger(CompanyLeadService.name)
+  private readonly logger = new Logger(CompanyLeadService.name);
 
   async findAll(): Promise<CompanyLeadDto> {
     try {
       const companyLeads = await this.companyLeadRepository.find();
       return Response.factory(CompanyLeadDto, companyLeads);
-    } catch(error) {
-
-    }
+    } catch (error) {}
   }
 
   async findOne(id: string): Promise<CompanyLeadDto> {
@@ -28,10 +26,9 @@ export class CompanyLeadService {
       const companyLead = await this.companyLeadRepository.findOne({
         where: { id },
       });
-      return Response.factory(CompanyLeadDto, companyLead) as CompanyLeadDto;
-    } catch(error) {
 
-    }
+      return Response.factory(CompanyLeadDto, companyLead) as CompanyLeadDto;
+    } catch (error) {}
   }
 
   async create(
@@ -40,11 +37,10 @@ export class CompanyLeadService {
     try {
       const newCompanyLead = this.companyLeadRepository.create(companyLeadDto);
       const companyLead = await this.companyLeadRepository.save(newCompanyLead);
-      this.logger.log("CompanyLead created");
-      return Response.factory(CompanyLeadDto, companyLead);
-    } catch(error) {
+      this.logger.log('CompanyLead created');
 
-    }
+      return Response.factory(CompanyLeadDto, companyLead) as CompanyLeadDto;
+    } catch (error) {}
   }
 
   async update(
@@ -56,17 +52,14 @@ export class CompanyLeadService {
       const companyLeadUpdated = await this.companyLeadRepository.findOne({
         where: { id },
       });
-      return Response.factory(CompanyLeadDto, companyLeadUpdated);
-    } catch(error) {
 
-    }
+      return Response.factory(CompanyLeadDto, companyLeadUpdated);
+    } catch (error) {}
   }
 
   async delete(id: string): Promise<void> {
     try {
       await this.companyLeadRepository.delete(id);
-    } catch(error) {
-
-    }
+    } catch (error) {}
   }
 }

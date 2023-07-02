@@ -1,4 +1,4 @@
-import { v4, validate } from 'uuid';
+import { validate, v4 } from 'uuid';
 
 export function isUUID(input: string): boolean {
   return validate(input);

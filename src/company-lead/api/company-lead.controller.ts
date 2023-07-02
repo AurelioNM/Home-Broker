@@ -8,8 +8,8 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CompanyLeadService } from './services/company-lead.service';
-import { CompanyLeadDto } from './dto/company-lead-dto';
+import { CompanyLeadService } from '../services/company-lead.service';
+import { CompanyLeadDto } from '../dto/company-lead-dto';
 
 @Controller('company-lead')
 export class CompanyLeadController {
