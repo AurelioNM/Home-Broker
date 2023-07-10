@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { CompanyLeadController } from './api/company-lead.controller';
 import { CompanyLeadService } from './services/company-lead.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CompanyLead } from './entities/company-lead.entity';
+import { CompanyLeadEntity } from './entities/company-lead.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([CompanyLead])],
+  imports: [TypeOrmModule.forFeature([CompanyLeadEntity])],
   controllers: [CompanyLeadController],
   providers: [CompanyLeadService],
 })

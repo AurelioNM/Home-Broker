@@ -1,9 +1,9 @@
-import { BaseEntity } from '../../utils-common/entities/base.entity';
+import { BaseEntity } from '~/common-util/base.entity';
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 @Index('pk_companyleads', ['id'], { unique: true })
 @Entity('company_leads', { schema: 'public' })
-export class CompanyLead extends BaseEntity {
+export class CompanyLeadEntity extends BaseEntity {
   @Column('character varying', {
     name: 'name',
     length: 255,

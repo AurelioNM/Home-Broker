@@ -1,0 +1,12 @@
+server:
+  port: 3010
+  origin: '*'
+
+db:
+  type: 'postgres'
+  host: 'localhost'
+  port: '5441'
+  database: 'companyprofile'
+  username: 'companyprofile'
+  password: 'companyprofile'
+  synchronize: false

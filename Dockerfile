@@ -1,15 +1,12 @@
-FROM node:16
+# FROM 371822295414.dkr.ecr.us-east-2.amazonaws.com/node:latest
+FROM node:14
 
-WORKDIR /app
+RUN mkdir -p /home/ubuntu/app
 
-COPY package*.json ./
+RUN npm config set cache /home/node/app/.npm-cache --global
 
-RUN npm install --force
+WORKDIR /home/ubuntu/app
 
 COPY . .
 
-RUN npm run build
-
-EXPOSE 3000
-
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run-script", "start"]

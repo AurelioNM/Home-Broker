@@ -5,17 +5,13 @@ server:
 db:
   type: 'postgres'
   host: 'localhost'
-  port: '5441'
-  database: 'companyprofile'
-  username: 'companyprofile'
-  password: 'companyprofile'
+  port: '5442'
+  database: 'companyprofiletest'
+  username: 'companyprofiletest'
+  password: 'companyprofiletest'
   synchronize: false
 
 jwt:
-  REDIS_HOST: 'localhost'
-  REDIS_PORT: '6391'
-  TOKEN_DATABASE: '0'
-  REDIS_PASSWORD: '123'
   REDIS_TEST_HOST: 'localhost'
   REDIS_TEST_PORT: '6392'
   TOKEN_TEST_DATABASE: '0'

@@ -1,42 +1,57 @@
 version: '3'
 services:
-#  nestapp:
-#    container_name: nestapp
-#    image: francescoxx/nestapp:1.0.0
-#    build: .
-#    ports:
-#      - '3003:3000'
-#    environment:
-#      - DB_TYPE=postgres
-#      - PG_USER=postgres
-#      - PG_PASSWORD=postgres
-#      - PG_DB=postgres
-#      - PG_PORT=5432
-#      - PG_HOST=db
-#    depends_on:
-#      - nestdb
-#    networks:
-#      - nestnet
-#    volumes:
-#      - ./:/app
-
-  nestdb:
-    container_name: nestdb
+  cacau-db:
+    container_name: cacau-db
     image: postgres
     environment:
-      POSTGRES_USER: nest
-      POSTGRES_PASSWORD: nest
-      POSTGRES_DB: nest
+      POSTGRES_USER: cacau
+      POSTGRES_PASSWORD: cacau
+      POSTGRES_DB: cacau
     ports:
-      - '5440:5432'
+      - '5451:5432'
     networks:
-      - nestnet
+      - cacau-net
     volumes:
-      - nestdbvol:/var/lib/postgresql/data
+      - cacau-db-vol:/var/lib/postgresql/data
+
+  cacau-db-test:
+    container_name: cacau-db-test
+    image: postgres
+    environment:
+      POSTGRES_USER: cacautest
+      POSTGRES_PASSWORD: cacautest
+      POSTGRES_DB: cacautest
+    ports:
+      - '5452:5432'
+    networks:
+      - cacau-net
+
+  cacau-redis:
+    image: 'redis:3.2.6'
+    container_name: cacau-redis
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    ports:
+      - '6398:6379'
+    volumes:
+      - './.redis_data:/data'
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    networks:
+      - cacau-net
+
+  cacau-redis-test:
+    image: 'redis:3.2.6'
+    container_name: cacau-redis-test
+    ports:
+      - '6399:6379'
+    volumes:
+      - './.redis_data:/data'
+    networks:
+      - cacau-net
 
 volumes:
-  nestdbvol: {}
+  cacau-db-vol: {}
 
 networks:
-  nestnet:
+  cacau-net:
     driver: bridge

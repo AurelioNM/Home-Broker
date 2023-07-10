@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CompanyLead } from '../entities/company-lead.entity';
+import { CompanyLeadEntity } from '../entities/company-lead.entity';
 import { Repository, UpdateResult } from 'typeorm';
 import { CompanyLeadDto } from '../dto/company-lead-dto';
 import { CompanyLeadExceptionEnum } from '../exceptions/company-lead.exceptions';
@@ -13,17 +13,17 @@ import { CompanyLeadExceptionEnum } from '../exceptions/company-lead.exceptions'
 @Injectable()
 export class CompanyLeadService {
   constructor(
-    @InjectRepository(CompanyLead)
-    private companyLeadRepository: Repository<CompanyLead>,
+    @InjectRepository(CompanyLeadEntity)
+    private companyLeadRepository: Repository<CompanyLeadEntity>,
   ) {}
 
   private readonly logger = new Logger(CompanyLeadService.name);
 
-  async findAll(): Promise<CompanyLead[]> {
+  async findAll(): Promise<CompanyLeadEntity[]> {
     return this.companyLeadRepository.find();
   }
 
-  async findOne(id: string): Promise<CompanyLead> {
+  async findOne(id: string): Promise<CompanyLeadEntity> {
     const companyLead = await this.companyLeadRepository.findOneBy({ id });
     if (!companyLead) {
       throw new NotFoundException(
@@ -33,7 +33,9 @@ export class CompanyLeadService {
     return companyLead;
   }
 
-  async create(companyLeadDto: Partial<CompanyLeadDto>): Promise<CompanyLead> {
+  async create(
+    companyLeadDto: Partial<CompanyLeadDto>,
+  ): Promise<CompanyLeadEntity> {
     const companyLead = await this.companyLeadRepository.findOneBy({
       name: companyLeadDto.name,
     });
@@ -44,12 +46,16 @@ export class CompanyLeadService {
     }
 
     const companyLeadEntity = this.companyLeadRepository.create(companyLeadDto);
+    this.logger.log(
+      'Trying to create CompanyLead -> ' + JSON.stringify(companyLeadEntity),
+    );
+
     return await this.companyLeadRepository.save(companyLeadEntity);
   }
 
   async update(
     id: string,
-    companyLeadDto: Partial<CompanyLead>,
+    companyLeadDto: Partial<CompanyLeadDto>,
   ): Promise<UpdateResult> {
     return await this.companyLeadRepository.update(id, companyLeadDto);
   }

@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
-import { CompanyLeadModule } from './company-lead/company-lead.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import typeOrmConfigTest from './config/typeorm-config-test';
 import typeOrmConfig from './config/typeorm.config';
+import { CompanyLeadModule } from './company-lead/company-lead.module';
+import { AuthModule } from './auth/authy.module';
+import { CacheModule } from '@nestjs/cache-manager';
+import { tokenConfiguration } from './config/tokenConfig';
 
 @Module({
   imports: [
@@ -15,6 +18,8 @@ import typeOrmConfig from './config/typeorm.config';
     TypeOrmModule.forRoot(
       process.env.NODE_ENV === 'test' ? typeOrmConfigTest() : typeOrmConfig(),
     ),
+    AuthModule,
+    CacheModule.register(tokenConfiguration()),
     CompanyLeadModule,
   ],
 })
