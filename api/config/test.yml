@@ -1,20 +1,20 @@
 server:
-  port: 3010
+  port: 3015
   origin: '*'
 
 db:
   type: 'postgres'
   host: 'localhost'
-  port: '5442'
-  database: 'companyprofiletest'
-  username: 'companyprofiletest'
-  password: 'companyprofiletest'
+  port: '5452'
+  database: 'bitscrapertest'
+  username: 'bitscrapertest'
+  password: 'bitscrapertest'
   synchronize: false
 
 jwt:
   REDIS_TEST_HOST: 'localhost'
-  REDIS_TEST_PORT: '6392'
+  REDIS_TEST_PORT: '6399'
   TOKEN_TEST_DATABASE: '0'
-  JWT_SECRET: 'globalfy_accesstoken'
+  JWT_SECRET: 'bitscraper_accesstoken'
   CACHE_TOKEN_SECRET: 'abcdefg'
   JWT_SECRET_EXPIRES_IN: '30m'

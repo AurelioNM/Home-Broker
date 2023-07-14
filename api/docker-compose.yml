@@ -1,34 +1,34 @@
 version: '3'
 services:
-  cacau-db:
-    container_name: cacau-db
+  bit-scraper-db:
+    container_name: bit-scraper-db
     image: postgres
     environment:
-      POSTGRES_USER: cacau
-      POSTGRES_PASSWORD: cacau
-      POSTGRES_DB: cacau
+      POSTGRES_USER: bitscraper
+      POSTGRES_PASSWORD: bitscraper
+      POSTGRES_DB: bitscraper
     ports:
       - '5451:5432'
     networks:
-      - cacau-net
+      - bit-scraper-net
     volumes:
-      - cacau-db-vol:/var/lib/postgresql/data
+      - bit-scraper-db-vol:/var/lib/postgresql/data
 
-  cacau-db-test:
-    container_name: cacau-db-test
+  bit-scraper-db-test:
+    container_name: bit-scraper-db-test
     image: postgres
     environment:
-      POSTGRES_USER: cacautest
-      POSTGRES_PASSWORD: cacautest
-      POSTGRES_DB: cacautest
+      POSTGRES_USER: bitscrapertest
+      POSTGRES_PASSWORD: bitscrapertest
+      POSTGRES_DB: bitscrapertest
     ports:
       - '5452:5432'
     networks:
-      - cacau-net
+      - bit-scraper-net
 
-  cacau-redis:
+  bit-scraper-redis:
     image: 'redis:3.2.6'
-    container_name: cacau-redis
+    container_name: bit-scraper-redis
     command: redis-server --requirepass ${REDIS_PASSWORD}
     ports:
       - '6398:6379'
@@ -37,21 +37,21 @@ services:
     environment:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
     networks:
-      - cacau-net
+      - bit-scraper-net
 
-  cacau-redis-test:
+  bit-scraper-redis-test:
     image: 'redis:3.2.6'
-    container_name: cacau-redis-test
+    container_name: bit-scraper-redis-test
     ports:
       - '6399:6379'
     volumes:
       - './.redis_data:/data'
     networks:
-      - cacau-net
+      - bit-scraper-net
 
 volumes:
-  cacau-db-vol: {}
+  bit-scraper-db-vol: {}
 
 networks:
-  cacau-net:
+  bit-scraper-net:
     driver: bridge

@@ -4,7 +4,12 @@ import { CompanyLeadController } from '~/company-lead/api/company-lead.controlle
 import { CompanyLeadEntity } from '~/company-lead/entities/company-lead.entity';
 import { CompanyLeadService } from '~/company-lead/services/company-lead.service';
 import { Response } from '~/common-util/factory-response';
-import { mockListCompanyLead } from '../factory/company-lead.factory';
+import {
+  mockListCompanyLead,
+  mockOneCompanyLead,
+  mockOneCompanyLeadWithId,
+} from '../factory/company-lead.factory';
+import { generateUUID } from '~/common-util/uuid';
 
 describe('CompanyLeadController - Test', () => {
   let companyLeadController: CompanyLeadController;
@@ -12,6 +17,10 @@ describe('CompanyLeadController - Test', () => {
 
   const mockCompanyLeadService = {
     findAll: jest.fn((dto) => dto),
+    findOne: jest.fn((dto) => dto),
+    create: jest.fn((dto) => dto),
+    update: jest.fn((dto) => dto),
+    delete: jest.fn((dto) => dto),
   };
 
   beforeEach(async () => {
@@ -42,7 +51,7 @@ describe('CompanyLeadController - Test', () => {
         companyLeadList,
       ) as unknown as CompanyLeadDto[];
 
-      mockCompanyLeadService.findAll.mockResolvedValue(listDto);
+      mockCompanyLeadService.findAll.mockResolvedValue(companyLeadList);
       const listResult = await companyLeadController.getAll();
 
       expect(spyCompanyLeadService.findAll).toBeCalled();
@@ -50,10 +59,10 @@ describe('CompanyLeadController - Test', () => {
         const dtoFiltered = listDto.filter((value) => value.id === result.id);
 
         dtoFiltered.forEach((value) => {
-          expect(value.name).toBe(result.name);
-          expect(value.structure).toBe(result.structure);
-          expect(value.customerName).toBe(result.customerName);
-          expect(value.customerEmail).toBe(result.customerEmail);
+          expect(result.name).toBe(value.name);
+          expect(result.structure).toBe(value.structure);
+          expect(result.customerName).toBe(value.customerName);
+          expect(result.customerEmail).toBe(value.customerEmail);
         });
       });
     });

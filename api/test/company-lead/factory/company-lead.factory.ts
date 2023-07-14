@@ -1,7 +1,31 @@
+import { CompanyLeadDto } from '~/company-lead/dto/company-lead-dto';
 import { CompanyLeadEntity } from '~/company-lead/entities/company-lead.entity';
 
 export const mockOneCompanyLead = (): CompanyLeadEntity => {
   const companyLead: CompanyLeadEntity = new CompanyLeadEntity();
+  companyLead.id = '123';
+  companyLead.name = 'New Company';
+  companyLead.structure = 'LLC';
+  companyLead.customerName = 'New Company Customer';
+  companyLead.customerEmail = 'email@test.com';
+
+  return companyLead;
+};
+
+export const mockOneCompanyLeadDto = (): CompanyLeadDto => {
+  const companyLead: CompanyLeadDto = new CompanyLeadDto();
+  companyLead.id = '123';
+  companyLead.name = 'New Company';
+  companyLead.structure = 'LLC';
+  companyLead.customerName = 'New Company Customer';
+  companyLead.customerEmail = 'email@test.com';
+
+  return companyLead;
+};
+
+export const mockOneCompanyLeadWithId = (id: string): CompanyLeadEntity => {
+  const companyLead: CompanyLeadEntity = new CompanyLeadEntity();
+  companyLead.id = id;
   companyLead.name = 'New Company';
   companyLead.structure = 'LLC';
   companyLead.customerName = 'New Company Customer';
