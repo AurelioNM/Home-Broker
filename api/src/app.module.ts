@@ -7,6 +7,8 @@ import { CompanyLeadModule } from './company-lead/company-lead.module';
 import { AuthModule } from './auth/authy.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import { tokenConfiguration } from './config/tokenConfig';
+import { CustomerModule } from './customer/customer.module';
+import { AddressModule } from './address/address.module';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { tokenConfiguration } from './config/tokenConfig';
     AuthModule,
     CacheModule.register(tokenConfiguration()),
     CompanyLeadModule,
+    CustomerModule,
+    AddressModule,
   ],
 })
 export class AppModule {}
