@@ -1,25 +1,47 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, UpdateResult } from 'typeorm';
+import { CustomerEntity } from '../entities/customer.entity';
 import { CustomerDto } from '../dto/customer.dto';
 
 @Injectable()
 export class CustomerService {
-  create(createCustomerDto: CustomerDto) {
-    return 'This action adds a new customer';
+  constructor(
+    @InjectRepository(CustomerEntity)
+    private customerRepository: Repository<CustomerEntity>,
+  ) {}
+
+  private readonly logger = new Logger(CustomerService.name);
+
+  async findAll(): Promise<CustomerEntity[]> {
+    return this.customerRepository.find();
   }
 
-  findAll() {
-    return `This action returns all customer`;
+  async findOne(id: string): Promise<CustomerEntity> {
+    const customer = await this.customerRepository.findOneBy({ id });
+    if (!customer) {
+      throw new NotFoundException();
+    }
+    return customer;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} customer`;
+  async create(customerDto: Partial<CustomerDto>): Promise<CustomerEntity> {
+    const addressEntity = this.customerRepository.create(customerDto);
+    this.logger.log(
+      'Trying to create customer -> ' + JSON.stringify(addressEntity),
+    );
+
+    return await this.customerRepository.save(addressEntity);
   }
 
-  update(id: number, customerDto: Partial<CustomerDto>) {
-    return `This action updates a #${id} customer`;
+  async update(
+    id: string,
+    customerDto: Partial<CustomerDto>,
+  ): Promise<UpdateResult> {
+    return await this.customerRepository.update(id, customerDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} customer`;
+  async delete(id: string): Promise<void> {
+    await this.customerRepository.delete(id);
   }
 }
