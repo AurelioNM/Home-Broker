@@ -11,15 +11,15 @@ import { generateUUID } from './uuid';
 
 export class BaseEntity extends TypeOrmBaseEntity {
   @PrimaryColumn('uuid', {
-    primary: true,
     name: 'id',
+    primary: true,
   })
   id: string = generateUUID();
 
   @Generated('increment')
   @Column({
-    type: 'bigint',
     name: 'alternativeid',
+    type: 'bigint',
   })
   alternativeid: number;
 
