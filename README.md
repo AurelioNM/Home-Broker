@@ -1,6 +1,13 @@
 ## Description
 
-## Installation
+## SETUP and START api
+
+```bash
+$ cd ./api
+$ ./start-api.sh
+```
+
+## Install dependencies
 
 ```bash
 $ yarn install --ignore-engines
