@@ -11,7 +11,7 @@ export class CustomerEntity extends BaseEntity {
     eager: true,
   })
   @JoinColumn({ name: 'address_id', referencedColumnName: 'id' })
-  address: AddressEntity;
+  address?: AddressEntity;
 
   @Column('character varying', {
     name: 'name',
