@@ -13,7 +13,7 @@ import { Response } from '~/common-util/factory-response';
 import { AuthAuthenticated } from '~/auth/decorators/auth-authenticated.decorators';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-// @AuthAuthenticated()
+@AuthAuthenticated()
 @ApiTags('companyLead')
 @Controller('company-lead')
 export class CompanyLeadController {

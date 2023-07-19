@@ -1,15 +1,10 @@
 import { BaseDto } from '~/common-util/base-dto';
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { AddressDto } from '~/address/dto/address.dto';
 
 export class CustomerDto extends BaseDto {
-  @ApiProperty()
-  @Expose()
-  @Type(() => AddressDto)
-  address?: AddressDto;
-
   @ApiProperty({ example: 'name' })
   @Expose()
   @IsNotEmpty()
@@ -35,7 +30,6 @@ export class CustomerDto extends BaseDto {
   email: string;
 
   @ApiProperty({ example: 'password' })
-  @Expose()
   @IsNotEmpty()
   @IsString()
   password: string;
@@ -57,4 +51,20 @@ export class CustomerDto extends BaseDto {
   @IsNotEmpty()
   @IsNumber()
   monthly_income: number;
+
+  @ApiProperty({
+    example: {
+      cep: '13165-000',
+      state: 'Narnia',
+      city: 'Rio de Janeiro',
+      district: 'Gavea',
+      street: 'Street name',
+      number: '21-A',
+      complement: 'Next to Padaria Jose',
+    },
+  })
+  @Expose()
+  @IsOptional()
+  @Type(() => AddressDto)
+  address?: AddressDto;
 }
