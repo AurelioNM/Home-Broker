@@ -13,7 +13,7 @@ import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { LeadService } from '../services/lead.service';
 import { LeadDto } from '../dto/lead.dto';
 
-@AuthAuthenticated()
+// @AuthAuthenticated()
 @ApiTags('lead')
 @Controller('lead')
 export class LeadController {
@@ -21,15 +21,15 @@ export class LeadController {
 
   @ApiOkResponse({ type: LeadDto, isArray: true })
   @Get()
-  async getAll(): Promise<LeadDto[]> {
+  async findAll(): Promise<LeadDto[]> {
     const leads = await this.leadService.findAll();
     return Response.factory(LeadDto, leads) as unknown as LeadDto[];
   }
 
   @ApiOkResponse({ type: LeadDto })
   @Get(':id')
-  async getById(@Param('id') id: string): Promise<LeadDto> {
-    const lead = await this.leadService.findOne(id);
+  async findById(@Param('id') id: string): Promise<LeadDto> {
+    const lead = await this.leadService.findById(id);
     return Response.factory(LeadDto, lead);
   }
 
@@ -47,7 +47,7 @@ export class LeadController {
     @Body() leadDto: LeadDto,
   ): Promise<LeadDto> {
     await this.leadService.update(id, leadDto);
-    const leadUpdated = await this.leadService.findOne(id);
+    const leadUpdated = await this.leadService.findById(id);
 
     return Response.factory(LeadDto, leadUpdated);
   }
@@ -55,7 +55,7 @@ export class LeadController {
   @ApiOkResponse()
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<void> {
-    await this.leadService.findOne(id);
+    await this.leadService.findById(id);
     return this.leadService.delete(id);
   }
 }

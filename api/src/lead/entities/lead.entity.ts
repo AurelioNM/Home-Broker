@@ -1,8 +1,10 @@
-import { Column, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity, Index, JoinColumn, OneToOne } from 'typeorm';
 import { BaseEntity } from '~/common-util/base.entity';
 import { CustomerEntity } from '~/customer/entities/customer.entity';
 import { LeadDto } from '../dto/lead.dto';
 
+@Index('pk_leads', ['id'], { unique: true })
+@Entity('leads', { schema: 'public' })
 export class LeadEntity extends BaseEntity {
   @OneToOne(() => CustomerEntity, (adress) => adress, {
     onDelete: 'RESTRICT',

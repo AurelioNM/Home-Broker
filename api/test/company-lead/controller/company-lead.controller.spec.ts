@@ -42,7 +42,7 @@ describe('CompanyLeadController - Test', () => {
       moduleRef.get<CompanyLeadService>(CompanyLeadService);
   });
 
-  describe('@Get -> getAll', () => {
+  describe('@Get -> findAll', () => {
     it('should get all CompanyLeads', async () => {
       const companyLeadList: CompanyLeadEntity[] = mockListCompanyLead();
 
@@ -52,7 +52,7 @@ describe('CompanyLeadController - Test', () => {
       ) as unknown as CompanyLeadDto[];
 
       mockCompanyLeadService.findAll.mockResolvedValue(companyLeadList);
-      const listResult = await companyLeadController.getAll();
+      const listResult = await companyLeadController.findAll();
 
       expect(spyCompanyLeadService.findAll).toBeCalled();
       listResult.forEach((result) => {

@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
-import { IsOptional } from 'class-validator';
-import { AddressDto } from '~/address/dto/address.dto';
+import { Expose, Type } from 'class-transformer';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import { BaseDto } from '~/common-util/base-dto';
 import { CustomerDto } from '~/customer/dto/customer.dto';
 
@@ -27,6 +26,7 @@ export class LeadDto extends BaseDto {
     },
   })
   @Type(() => CustomerDto)
-  @IsOptional()
-  customer: CustomerDto;
+  @Expose()
+  @IsNotEmpty()
+  data: CustomerDto;
 }

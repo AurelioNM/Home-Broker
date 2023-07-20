@@ -13,7 +13,7 @@ import { Response } from '~/common-util/factory-response';
 import { AuthAuthenticated } from '~/auth/decorators/auth-authenticated.decorators';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-@AuthAuthenticated()
+// @AuthAuthenticated()
 @ApiTags('companyLead')
 @Controller('company-lead')
 export class CompanyLeadController {
@@ -21,7 +21,7 @@ export class CompanyLeadController {
 
   @ApiOkResponse({ type: CompanyLeadDto, isArray: true })
   @Get()
-  async getAll(): Promise<CompanyLeadDto[]> {
+  async findAll(): Promise<CompanyLeadDto[]> {
     const companyLeads = await this.companyLeadService.findAll();
     return Response.factory(
       CompanyLeadDto,
@@ -31,7 +31,7 @@ export class CompanyLeadController {
 
   @ApiOkResponse({ type: CompanyLeadDto })
   @Get(':id')
-  async getById(@Param('id') id: string): Promise<CompanyLeadDto> {
+  async findById(@Param('id') id: string): Promise<CompanyLeadDto> {
     const companyLead = await this.companyLeadService.findOne(id);
     return Response.factory(CompanyLeadDto, companyLead);
   }

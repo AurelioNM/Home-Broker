@@ -17,7 +17,7 @@ export class LeadService {
     return this.leadRepository.find();
   }
 
-  async findOne(id: string): Promise<LeadEntity> {
+  async findById(id: string): Promise<LeadEntity> {
     const lead = await this.leadRepository.findOneBy({ id });
     if (!lead) {
       throw new NotFoundException();
@@ -26,8 +26,22 @@ export class LeadService {
   }
 
   async create(leadDto: Partial<LeadDto>): Promise<LeadEntity> {
-    const leadEntity = this.leadRepository.create(leadDto);
-    this.logger.log('Trying to create lead -> ' + JSON.stringify(leadEntity));
+    this.logger.log('Lead dto -> ' + JSON.stringify(leadDto));
+
+    const result = await this.leadRepository.query(`
+      SELECT COUNT(*)
+      FROM leads
+      WHERE data ->> 'cpf' = '${leadDto.data.cpf}'
+      AND deleteddate IS NULL
+      LIMIT 1;
+    `);
+
+    if (result[0].count > 0) throw new Error('CPF REPETIDO');
+
+    const leadEntity = this.leadRepository.create({
+      data: leadDto,
+    });
+    this.logger.log('Creating lead -> ' + JSON.stringify(leadEntity));
 
     return await this.leadRepository.save(leadEntity);
   }
