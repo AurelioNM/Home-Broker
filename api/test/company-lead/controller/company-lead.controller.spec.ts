@@ -4,12 +4,7 @@ import { CompanyLeadController } from '~/company-lead/api/company-lead.controlle
 import { CompanyLeadEntity } from '~/company-lead/entities/company-lead.entity';
 import { CompanyLeadService } from '~/company-lead/services/company-lead.service';
 import { Response } from '~/common-util/factory-response';
-import {
-  mockListCompanyLead,
-  mockOneCompanyLead,
-  mockOneCompanyLeadWithId,
-} from '../factory/company-lead.factory';
-import { generateUUID } from '~/common-util/uuid';
+import { mockListCompanyLead } from '../factory/company-lead.factory';
 
 describe('CompanyLeadController - Test', () => {
   let companyLeadController: CompanyLeadController;

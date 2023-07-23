@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -8,6 +8,7 @@ import {
 import { AllExceptionsFilter } from '~/common-util/all-exceptions-filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { TransformInterceptor } from './common-util/transform.interceptor';
 
 async function bootstrap() {
   const port = process.env.PORT;
@@ -117,7 +118,15 @@ async function bootstrap() {
   };
   app.enableCors(corsOptions);
 
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
   app.useGlobalFilters(new AllExceptionsFilter());
+  app.useGlobalInterceptors(new TransformInterceptor());
 
   await app
     .listen(parseInt(port.toString(), 10), '0.0.0.0')

@@ -1,17 +1,10 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Response } from '~/common-util/factory-response';
 import { AuthAuthenticated } from '~/auth/decorators/auth-authenticated.decorators';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { LeadService } from '../services/lead.service';
-import { LeadDto } from '../dto/lead.dto';
+import { CreateLeadDto } from '../dto/create-lead.dto';
+import { GetLeadDto } from '../dto/get-lead.dto copy';
 
 // @AuthAuthenticated()
 @ApiTags('lead')
@@ -19,43 +12,24 @@ import { LeadDto } from '../dto/lead.dto';
 export class LeadController {
   constructor(private readonly leadService: LeadService) {}
 
-  @ApiOkResponse({ type: LeadDto, isArray: true })
+  @ApiOkResponse({ type: GetLeadDto, isArray: true })
   @Get()
-  async findAll(): Promise<LeadDto[]> {
+  async findAll(): Promise<GetLeadDto[]> {
     const leads = await this.leadService.findAll();
-    return Response.factory(LeadDto, leads) as unknown as LeadDto[];
+    return Response.factory(GetLeadDto, leads) as unknown as GetLeadDto[];
   }
 
-  @ApiOkResponse({ type: LeadDto })
+  @ApiOkResponse({ type: GetLeadDto })
   @Get(':id')
-  async findById(@Param('id') id: string): Promise<LeadDto> {
+  async findById(@Param('id') id: string): Promise<GetLeadDto> {
     const lead = await this.leadService.findById(id);
-    return Response.factory(LeadDto, lead);
+    return Response.factory(GetLeadDto, lead);
   }
 
-  @ApiOkResponse({ type: LeadDto })
+  @ApiOkResponse({ type: CreateLeadDto })
   @Post()
-  async create(@Body() leadDto: LeadDto): Promise<LeadDto> {
-    const lead = this.leadService.create(leadDto);
-    return Response.factory(LeadDto, lead);
-  }
-
-  @ApiOkResponse({ type: LeadDto })
-  @Put(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() leadDto: LeadDto,
-  ): Promise<LeadDto> {
-    await this.leadService.update(id, leadDto);
-    const leadUpdated = await this.leadService.findById(id);
-
-    return Response.factory(LeadDto, leadUpdated);
-  }
-
-  @ApiOkResponse()
-  @Delete(':id')
-  async delete(@Param('id') id: string): Promise<void> {
-    await this.leadService.findById(id);
-    return this.leadService.delete(id);
+  async create(@Body() createLeadDto: CreateLeadDto): Promise<CreateLeadDto> {
+    const lead = this.leadService.create(createLeadDto);
+    return Response.factory(CreateLeadDto, lead) as CreateLeadDto;
   }
 }
