@@ -8,7 +8,6 @@ import {
   mockOneLeadEntity,
 } from '../factory/lead.factory';
 import { CreateLeadDto } from '~/lead/dto/create-lead.dto';
-import { Response } from '~/common-util/factory-response';
 import { GetLeadDto } from '~/lead/dto/get-lead.dto copy';
 
 describe('LeadDto Controller - Test', () => {

@@ -1,7 +1,7 @@
 import { Column, Entity, Index, JoinColumn, OneToOne } from 'typeorm';
 import { BaseEntity } from '~/common-util/base.entity';
 import { CustomerEntity } from '~/customer/entities/customer.entity';
-import { CreateLeadDto } from '../dto/create-lead.dto';
+import { LeadDataDto } from '../dto/lead-data.dto';
 
 @Index('pk_leads', ['id'], { unique: true })
 @Entity('leads', { schema: 'public' })
@@ -18,5 +18,5 @@ export class LeadEntity extends BaseEntity {
   customerId?: string;
 
   @Column('jsonb', { name: 'data' })
-  data: CreateLeadDto;
+  data: LeadDataDto;
 }

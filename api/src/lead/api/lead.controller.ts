@@ -4,7 +4,7 @@ import { AuthAuthenticated } from '~/auth/decorators/auth-authenticated.decorato
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { LeadService } from '../services/lead.service';
 import { CreateLeadDto } from '../dto/create-lead.dto';
-import { GetLeadDto } from '../dto/get-lead.dto copy';
+import { GetLeadDto } from '../dto/get-lead.dto';
 
 // @AuthAuthenticated()
 @ApiTags('lead')

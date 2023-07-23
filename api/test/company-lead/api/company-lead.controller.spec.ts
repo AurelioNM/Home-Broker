@@ -4,7 +4,7 @@ import { CompanyLeadController } from '~/company-lead/api/company-lead.controlle
 import { CompanyLeadEntity } from '~/company-lead/entities/company-lead.entity';
 import { CompanyLeadService } from '~/company-lead/services/company-lead.service';
 import { Response } from '~/common-util/factory-response';
-import { mockListCompanyLead } from '../factory/company-lead.factory';
+import { mockListCompanyLeadEntity } from '../factory/company-lead.factory';
 
 describe('CompanyLeadController - Test', () => {
   let companyLeadController: CompanyLeadController;
@@ -39,7 +39,7 @@ describe('CompanyLeadController - Test', () => {
 
   describe('@Get -> findAll', () => {
     it('should get all CompanyLeads', async () => {
-      const companyLeadList: CompanyLeadEntity[] = mockListCompanyLead();
+      const companyLeadList: CompanyLeadEntity[] = mockListCompanyLeadEntity();
 
       const listDto = Response.factory(
         CompanyLeadDto,

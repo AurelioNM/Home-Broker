@@ -1,6 +1,7 @@
 import { generateUUID } from '~/common-util/uuid';
 import { CreateLeadDto } from '~/lead/dto/create-lead.dto';
-import { GetLeadDto } from '~/lead/dto/get-lead.dto copy';
+import { GetLeadDto } from '~/lead/dto/get-lead.dto';
+import { LeadDataDto } from '~/lead/dto/lead-data.dto';
 import { LeadEntity } from '~/lead/entities/lead.entity';
 
 export const mockListGetLeadDto = (): GetLeadDto[] => {
@@ -48,4 +49,28 @@ export const mockOneCreateLeadDto = (): CreateLeadDto => {
   createLeadDto.surname = 'Lead';
 
   return createLeadDto;
+};
+
+export const mockListLeadEntity = (): LeadEntity[] => {
+  const leadList: LeadEntity[] = [];
+
+  for (let i = 1; i <= 3; i++) {
+    const lead: LeadEntity = new LeadEntity();
+
+    lead.id = generateUUID();
+    lead.createddate = new Date(new Date().toUTCString());
+    lead.customerId = null;
+
+    const leadDataDto: LeadDataDto = new LeadDataDto();
+    leadDataDto.cpf = `153-995-492-6${i}`;
+    leadDataDto.name = `Lead ${i}`;
+    leadDataDto.surname = 'Test';
+    leadDataDto.email = `leadData@gmail.com`;
+
+    lead.data = leadDataDto;
+
+    leadList.push(lead);
+  }
+
+  return leadList;
 };

@@ -34,7 +34,7 @@ export const mockOneCompanyLeadWithId = (id: string): CompanyLeadEntity => {
   return companyLead;
 };
 
-export const mockListCompanyLead = (): CompanyLeadEntity[] => {
+export const mockListCompanyLeadEntity = (): CompanyLeadEntity[] => {
   const companyLeadList: CompanyLeadEntity[] = [];
 
   for (let i = 1; i <= 3; i++) {
