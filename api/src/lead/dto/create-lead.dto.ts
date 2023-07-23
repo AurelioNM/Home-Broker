@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { BaseDto } from '~/common-util/base-dto';
 
 export class CreateLeadDto {
   @ApiProperty({ example: 'cpf' })

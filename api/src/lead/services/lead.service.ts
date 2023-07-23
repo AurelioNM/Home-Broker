@@ -26,15 +26,15 @@ export class LeadService {
   async findById(id: string): Promise<LeadEntity> {
     const lead = await this.leadRepository.findOneBy({ id });
     if (!lead) {
+      this.logger.warn('Lead not found');
       throw new NotFoundException(LeadExceptionEnum.LEAD_NOT_FOUND);
     }
     return lead;
   }
 
   async create(createLeadDto: Partial<CreateLeadDto>): Promise<LeadEntity> {
-    this.logger.log('Lead dto -> ' + JSON.stringify(createLeadDto));
-
     if (await this.isEmailTaken(createLeadDto.email)) {
+      this.logger.warn('Email is taken -> ' + createLeadDto.email);
       throw new BadRequestException(LeadExceptionEnum.LEAD_EMAIL_ALREADY_EXIST);
     }
 
@@ -54,7 +54,6 @@ export class LeadService {
       AND deleteddate IS NULL
       LIMIT 1;
     `);
-    this.logger.log('Result from condition -> ' + (result[0].count > 0));
     return result[0].count > 0;
   }
 }

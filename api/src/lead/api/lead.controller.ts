@@ -28,8 +28,8 @@ export class LeadController {
 
   @ApiOkResponse({ type: CreateLeadDto })
   @Post()
-  async create(@Body() createLeadDto: CreateLeadDto): Promise<CreateLeadDto> {
+  async create(@Body() createLeadDto: CreateLeadDto): Promise<GetLeadDto> {
     const lead = this.leadService.create(createLeadDto);
-    return Response.factory(CreateLeadDto, lead) as CreateLeadDto;
+    return Response.factory(GetLeadDto, lead) as GetLeadDto;
   }
 }
