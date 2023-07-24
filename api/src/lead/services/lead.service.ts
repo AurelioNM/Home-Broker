@@ -33,10 +33,7 @@ export class LeadService {
   }
 
   async create(createLeadDto: Partial<CreateLeadDto>): Promise<LeadEntity> {
-    if (await this.isEmailTaken(createLeadDto.email)) {
-      this.logger.warn('Email is taken -> ' + createLeadDto.email);
-      throw new BadRequestException(LeadExceptionEnum.LEAD_EMAIL_ALREADY_EXIST);
-    }
+    await this.validateIfEmailIsTaken(createLeadDto.email);
 
     const leadEntity = this.leadRepository.create({
       data: createLeadDto,
@@ -46,7 +43,7 @@ export class LeadService {
     return await this.leadRepository.save(leadEntity);
   }
 
-  async isEmailTaken(email: string): Promise<boolean> {
+  async validateIfEmailIsTaken(email: string): Promise<void> {
     const result = await this.leadRepository.query(`
       SELECT COUNT(*)
       FROM leads
@@ -54,6 +51,9 @@ export class LeadService {
       AND deleteddate IS NULL
       LIMIT 1;
     `);
-    return result[0].count > 0;
+    if (result[0].count > 0) {
+      this.logger.warn('Email is taken -> ' + email);
+      throw new BadRequestException(LeadExceptionEnum.LEAD_EMAIL_ALREADY_EXIST);
+    }
   }
 }

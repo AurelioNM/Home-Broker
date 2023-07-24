@@ -8,7 +8,7 @@ import {
   mockOneLeadEntity,
 } from '../factory/lead.factory';
 import { CreateLeadDto } from '~/lead/dto/create-lead.dto';
-import { GetLeadDto } from '~/lead/dto/get-lead.dto copy';
+import { GetLeadDto } from '~/lead/dto/get-lead.dto';
 
 describe('LeadDto Controller - Test', () => {
   let leadController: LeadController;
