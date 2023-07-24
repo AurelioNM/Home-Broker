@@ -4,12 +4,7 @@ import { CompanyLeadController } from '~/company-lead/api/company-lead.controlle
 import { CompanyLeadEntity } from '~/company-lead/entities/company-lead.entity';
 import { CompanyLeadService } from '~/company-lead/services/company-lead.service';
 import { Response } from '~/common-util/factory-response';
-import {
-  mockListCompanyLead,
-  mockOneCompanyLead,
-  mockOneCompanyLeadWithId,
-} from '../factory/company-lead.factory';
-import { generateUUID } from '~/common-util/uuid';
+import { mockListCompanyLeadEntity } from '../factory/company-lead.factory';
 
 describe('CompanyLeadController - Test', () => {
   let companyLeadController: CompanyLeadController;
@@ -42,9 +37,9 @@ describe('CompanyLeadController - Test', () => {
       moduleRef.get<CompanyLeadService>(CompanyLeadService);
   });
 
-  describe('@Get -> getAll', () => {
+  describe('@Get -> findAll', () => {
     it('should get all CompanyLeads', async () => {
-      const companyLeadList: CompanyLeadEntity[] = mockListCompanyLead();
+      const companyLeadList: CompanyLeadEntity[] = mockListCompanyLeadEntity();
 
       const listDto = Response.factory(
         CompanyLeadDto,
@@ -52,7 +47,7 @@ describe('CompanyLeadController - Test', () => {
       ) as unknown as CompanyLeadDto[];
 
       mockCompanyLeadService.findAll.mockResolvedValue(companyLeadList);
-      const listResult = await companyLeadController.getAll();
+      const listResult = await companyLeadController.findAll();
 
       expect(spyCompanyLeadService.findAll).toBeCalled();
       listResult.forEach((result) => {

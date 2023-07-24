@@ -9,6 +9,7 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { tokenConfiguration } from './config/tokenConfig';
 import { CustomerModule } from './customer/customer.module';
 import { AddressModule } from './address/address.module';
+import { LeadModule } from './lead/lead.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AddressModule } from './address/address.module';
     CompanyLeadModule,
     CustomerModule,
     AddressModule,
+    LeadModule,
   ],
 })
 export class AppModule {}

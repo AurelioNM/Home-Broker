@@ -1,7 +1,8 @@
-import { ApiHideProperty } from '@nestjs/swagger';
+import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 import { Exclude, Expose } from 'class-transformer';
 
 export abstract class BaseDto {
+  @ApiProperty({ example: '4032597f-1765-44db-ad08-f6f0a096efc9' })
   @Expose()
   id?: string;
 

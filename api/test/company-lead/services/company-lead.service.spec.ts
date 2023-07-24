@@ -3,7 +3,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { CompanyLeadService } from '~/company-lead/services/company-lead.service';
 import { CompanyLeadEntity } from '~/company-lead/entities/company-lead.entity';
 import {
-  mockListCompanyLead,
+  mockListCompanyLeadEntity,
   mockOneCompanyLead,
   mockOneCompanyLeadDto,
 } from '../factory/company-lead.factory';
@@ -51,7 +51,7 @@ describe('CompanyLeadService - test', () => {
 
   describe('findAll', () => {
     it('should return an array of CompanyLead', async () => {
-      const companyLeadList: CompanyLeadEntity[] = mockListCompanyLead();
+      const companyLeadList: CompanyLeadEntity[] = mockListCompanyLeadEntity();
 
       mockCompanyLeadRepository.find.mockReturnValue(companyLeadList);
       const resultList = await companyLeadService.findAll();

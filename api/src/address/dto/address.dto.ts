@@ -1,7 +1,7 @@
 import { BaseDto } from '~/common-util/base-dto';
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class AddressDto extends BaseDto {
   @ApiProperty({ example: 'cep' })
@@ -24,6 +24,7 @@ export class AddressDto extends BaseDto {
 
   @ApiProperty({ example: 'district' })
   @Expose()
+  @IsOptional()
   @IsString()
   district?: string;
 
@@ -35,11 +36,13 @@ export class AddressDto extends BaseDto {
 
   @ApiProperty({ example: 'number' })
   @Expose()
+  @IsOptional()
   @IsString()
   number?: string;
 
   @ApiProperty({ example: 'complement' })
   @Expose()
+  @IsOptional()
   @IsString()
   complement?: string;
 }
