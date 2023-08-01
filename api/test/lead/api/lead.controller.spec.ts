@@ -5,10 +5,12 @@ import { LeadService } from '~/lead/services/lead.service';
 import {
   mockListGetLeadDto,
   mockOneCreateLeadDto,
+  mockOneGetLeadDto,
   mockOneLeadEntity,
 } from '../factory/lead.factory';
 import { CreateLeadDto } from '~/lead/dto/create-lead.dto';
 import { GetLeadDto } from '~/lead/dto/get-lead.dto';
+import { LeadDataDto } from '~/lead/dto/lead-data.dto';
 
 describe('LeadDto Controller - Test', () => {
   let leadController: LeadController;
@@ -18,6 +20,7 @@ describe('LeadDto Controller - Test', () => {
     findAll: jest.fn((dto) => dto),
     findById: jest.fn((dto) => dto),
     create: jest.fn((dto) => dto),
+    updateLeadData: jest.fn((dto) => dto),
   };
 
   beforeEach(async () => {
@@ -75,4 +78,27 @@ describe('LeadDto Controller - Test', () => {
       expect(spyLeadService.create).toHaveBeenCalledWith(createLeadDto);
     });
   });
+
+  // describe('@Patch -> update', () => {
+  //   it('should update a Lead by ID', async () => {
+  //     const id = '7d8c3e55-1ee7-492a-bf3e-cbc0b1b77b86';
+  //     const updatedLead: GetLeadDto = mockOneGetLeadDto();
+  //     const leadDataDto: LeadDataDto = {
+  //       occupation: 'Developer',
+  //       monthly_income: 10000,
+  //     };
+  //     mockLeadService.updateLeadData.mockReturnValue(updatedLead);
+
+  //     const result = await leadController.update(id, leadDataDto);
+
+  //     console.log('Updated lead', JSON.stringify(result));
+
+  //     expect(result.data.monthly_income).toEqual(leadDataDto.monthly_income);
+  //     expect(result.data.occupation).toEqual(leadDataDto.occupation);
+  //     expect(spyLeadService.updateLeadData).toHaveBeenCalledWith(
+  //       id,
+  //       leadDataDto,
+  //     );
+  //   });
+  // });
 });

@@ -1,32 +1,32 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 import { AddressDto } from '~/address/dto/address.dto';
 
 export class LeadDataDto {
   @ApiProperty({ example: 'name' })
   @Expose()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  name: string;
+  name?: string;
 
   @ApiProperty({ example: 'surname' })
   @Expose()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  surname: string;
+  surname?: string;
 
   @ApiProperty({ example: 'cpf' })
   @Expose()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  cpf: string;
+  cpf?: string;
 
   @ApiProperty({ example: 'email' })
   @Expose()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  email: string;
+  email?: string;
 
   @ApiProperty({ example: 'password' })
   @IsOptional()

@@ -11,7 +11,6 @@ import { generateUUID } from '~/common-util/uuid';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { CompanyLeadExceptionEnum } from '~/company-lead/exceptions/company-lead.exceptions';
 import { CompanyLeadDto } from '~/company-lead/dto/company-lead-dto';
-import { UpdateResult } from 'typeorm';
 
 describe('CompanyLeadService - test', () => {
   let companyLeadService: CompanyLeadService;
@@ -164,7 +163,6 @@ describe('CompanyLeadService - test', () => {
 
   describe('update', () => {
     it('should update the CompanyLead', async () => {
-      const companyLeadEntity: CompanyLeadEntity = mockOneCompanyLead();
       const companyLeadDto: Partial<CompanyLeadDto> = {
         id: generateUUID(),
         name: 'Updated Company Lead',
