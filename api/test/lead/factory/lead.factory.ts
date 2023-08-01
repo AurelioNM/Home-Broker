@@ -26,6 +26,22 @@ export const mockListGetLeadDto = (): GetLeadDto[] => {
   return leadList;
 };
 
+export const mockOneGetLeadDto = (): GetLeadDto => {
+  const lead: GetLeadDto = new GetLeadDto();
+
+  lead.id = generateUUID();
+  lead.createddate = new Date(new Date().toUTCString());
+  lead.customerId = null;
+  lead.data = {
+    cpf: `153-995-492-61`,
+    name: `Lead Name`,
+    email: `leadtest@gmail.com`,
+    surname: 'Test',
+  };
+
+  return lead;
+};
+
 export const mockOneCreateLeadDto = (): CreateLeadDto => {
   const createLeadDto: CreateLeadDto = new CreateLeadDto();
   createLeadDto.cpf = '434-583-434-65';

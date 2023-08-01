@@ -11,6 +11,9 @@ import {
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { LeadExceptionEnum } from '~/lead/exceptions/lead.exceptions';
 import { CreateLeadDto } from '~/lead/dto/create-lead.dto';
+import { LeadDataDto } from '~/lead/dto/lead-data.dto';
+import { generateUUID } from '~/common-util/uuid';
+import { ExceptionConstants } from '~/common-util/exceptions-constants';
 
 describe('LeadService - test', () => {
   let leadService: LeadService;
@@ -24,6 +27,7 @@ describe('LeadService - test', () => {
   const mockLeadRepository = {
     find: jest.fn((entity) => entity),
     findOneBy: jest.fn((entity) => entity),
+    findById: jest.fn((entity) => entity),
     create: jest.fn((entity) => entity),
     save: jest.fn((entity) => entity),
     update: jest.fn((entity) => entity),
@@ -122,4 +126,58 @@ describe('LeadService - test', () => {
       expect(mockLeadRepository.save).toBeCalledTimes(1);
     });
   });
+
+  describe('validateFieldsSize', () => {
+    it('should throw BadRequestException if leadDataDto has no properties', async () => {
+      const leadDataDto = new LeadDataDto();
+
+      expect(() => leadService['validateFieldsSize'](leadDataDto)).toThrowError(
+        new BadRequestException(ExceptionConstants.NO_FIELDS_TO_UPDATE),
+      );
+    });
+
+    it('should not throw BadRequestException when leadDataDto has properties', () => {
+      const leadDataDto: LeadDataDto = { name: 'John', surname: 'Doe' };
+
+      expect(() =>
+        leadService['validateFieldsSize'](leadDataDto),
+      ).not.toThrowError(BadRequestException);
+    });
+  });
+
+  describe('mergeCurrentDataWithNewData', () => {
+    it('should merge current data with new data', () => {
+      const leadDataDto: LeadDataDto = { name: 'John', surname: 'Doe' };
+      const leadEntity: LeadEntity = new LeadEntity();
+      leadEntity.data = {
+        email: 'john@test.com',
+      };
+
+      const result = leadService['mergeCurrentDataWithNewData'](
+        leadDataDto,
+        leadEntity,
+      );
+
+      expect(result.data.name).toBe(leadDataDto.name);
+      expect(result.data.surname).toBe(leadDataDto.surname);
+      expect(result.data).toHaveProperty('email');
+    });
+  });
+
+  // describe('updateLeadDataJson', () => {
+  //   it('should update lead data json', async () => {
+  //     const id = generateUUID();
+  //     const leadDataDto: LeadDataDto = { name: 'John', surname: 'Doe' };
+  //     const leadEntity: LeadEntity = new LeadEntity();
+  //     leadEntity.data = {
+  //       email: 'test@gmail.com',
+  //     };
+
+  //     const result = await leadService['updateLeadDataJson'](id, leadDataDto);
+
+  //     expect(result.data.name).toBe(leadDataDto.name);
+  //     expect(result.data.surname).toBe(leadDataDto.surname);
+  //     expect(result.data).toHaveProperty('email');
+  //   });
+  // });
 });

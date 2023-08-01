@@ -1,10 +1,19 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { Response } from '~/common-util/factory-response';
 import { AuthAuthenticated } from '~/auth/decorators/auth-authenticated.decorators';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { LeadService } from '../services/lead.service';
 import { CreateLeadDto } from '../dto/create-lead.dto';
 import { GetLeadDto } from '../dto/get-lead.dto';
+import { LeadDataDto } from '../dto/lead-data.dto';
 
 // @AuthAuthenticated()
 @ApiTags('lead')
@@ -21,7 +30,7 @@ export class LeadController {
 
   @ApiOkResponse({ type: GetLeadDto })
   @Get(':id')
-  async findById(@Param('id') id: string): Promise<GetLeadDto> {
+  async findById(@Param('id', ParseUUIDPipe) id: string): Promise<GetLeadDto> {
     const lead = await this.leadService.findById(id);
     return Response.factory(GetLeadDto, lead);
   }
@@ -30,6 +39,16 @@ export class LeadController {
   @Post()
   async create(@Body() createLeadDto: CreateLeadDto): Promise<GetLeadDto> {
     const lead = this.leadService.create(createLeadDto);
-    return Response.factory(GetLeadDto, lead) as GetLeadDto;
+    return Response.factory(GetLeadDto, lead);
+  }
+
+  @ApiOkResponse({ type: GetLeadDto })
+  @Patch(':id')
+  async update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() leadDataDto: LeadDataDto,
+  ): Promise<GetLeadDto> {
+    const lead = await this.leadService.updateLeadDataJson(id, leadDataDto);
+    return Response.factory(GetLeadDto, lead);
   }
 }
