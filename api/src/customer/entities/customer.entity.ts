@@ -1,6 +1,7 @@
 import { Column, Entity, Index, JoinColumn, OneToOne } from 'typeorm';
 import { AddressEntity } from '~/address/entities/address.entity';
 import { BaseEntity } from '~/common-util/base.entity';
+import { PaymentCardEntity } from './payment_card.entity';
 
 @Index('pk_customers', ['id'], { unique: true })
 @Entity('customers', { schema: 'public' })
@@ -12,6 +13,14 @@ export class CustomerEntity extends BaseEntity {
   })
   @JoinColumn({ name: 'address_id', referencedColumnName: 'id' })
   address?: AddressEntity;
+
+  @OneToOne(() => PaymentCardEntity, (paymentCard) => paymentCard, {
+    onDelete: 'RESTRICT',
+    onUpdate: 'RESTRICT',
+    eager: true,
+  })
+  @JoinColumn({ name: 'main_payment_card_id', referencedColumnName: 'id' })
+  mainPaymentCard?: PaymentCardEntity;
 
   @Column('character varying', {
     name: 'name',
