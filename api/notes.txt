@@ -4,34 +4,35 @@ Controller
         CustomerPays.payCart()
     }
 UseCase
-    CustomerPays.payCart(){ 
+    CustomerPays.payCart() { 
         PaymentCardService.validateCard()
-        PaymentCardService.pay()
+        PaymentCardService.makePayment()
     }
 Service
     PaymentCardService.validateCard() {}
-    PaymentCardService.pay() {}
+    PaymentCardService.makePayment() {}
 
 ARCH:
 /Domain
     /Customer
         /DTOS
         CustomerEntity.ts
-/Infrastructure
-    /Repository
+/Infrastructure-Services
+    /Pipefy
+    /Queue
+    /CacheRepository
+    /DatabaseRepository
         /Customer
             CustomerRepository.ts
-/Operations
-    GetCustomerOperation.ts
-    CreateCustomerOperation.ts
-/Services
 /UseCases
     /CustomerPays
     /LeadRegister
+/Services
 
 NOTES:
 *Nest já tem a camada Repository. Se precisar de algo específico, fazer um Repository
 *Como modularizar (ou se devo) a aplicação
 *Precisa de Camada Service. E o controller chama UseCases ou a Service?
 *UseCases → Linguagem de negocio DDD
-*Services → apps externos fora da empresa
+*Infrastructure-Services → apps externos fora da empresa 
+*Usar LSP para pipefy integration
