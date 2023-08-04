@@ -1,0 +1,37 @@
+FLOW:
+Controller
+    PaymentController.pay() { 
+        CustomerPays.payCart()
+    }
+UseCase
+    CustomerPays.payCart(){ 
+        PaymentCardService.validateCard()
+        PaymentCardService.pay()
+    }
+Service
+    PaymentCardService.validateCard() {}
+    PaymentCardService.pay() {}
+
+ARCH:
+/Domain
+    /Customer
+        /DTOS
+        CustomerEntity.ts
+/Infrastructure
+    /Repository
+        /Customer
+            CustomerRepository.ts
+/Operations
+    GetCustomerOperation.ts
+    CreateCustomerOperation.ts
+/Services
+/UseCases
+    /CustomerPays
+    /LeadRegister
+
+NOTES:
+*Nest já tem a camada Repository. Se precisar de algo específico, fazer um Repository
+*Como modularizar (ou se devo) a aplicação
+*Precisa de Camada Service. E o controller chama UseCases ou a Service?
+*UseCases → Linguagem de negocio DDD
+*Services → apps externos fora da empresa
