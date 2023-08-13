@@ -12,18 +12,17 @@ export class PaymentCardEntity extends BaseEntity {
   customerId: string;
 
   @Column('character varying', {
-    name: 'number',
-    length: 20,
+    name: 'last_digits',
     nullable: false,
   })
-  number: string;
+  lastDigits: number;
 
   @Column('character varying', {
-    name: 'name',
+    name: 'owner_name',
     length: 100,
     nullable: false,
   })
-  owner_name: string;
+  ownerName: string;
 
   @Column('character varying', {
     name: 'expiry_date',

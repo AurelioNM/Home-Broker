@@ -1,7 +1,7 @@
 import { Column, Entity, Index, JoinColumn, OneToOne } from 'typeorm';
 import { AddressEntity } from '~/address/entities/address.entity';
 import { BaseEntity } from '~/common-util/base.entity';
-import { PaymentCardEntity } from './payment_card.entity';
+import { PaymentCardEntity } from '~/payment-card/entities/payment_card.entity';
 
 @Index('pk_customers', ['id'], { unique: true })
 @Entity('customers', { schema: 'public' })

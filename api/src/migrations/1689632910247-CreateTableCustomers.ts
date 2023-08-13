@@ -7,6 +7,7 @@ export class CreateTableCustomers1689632910247 implements MigrationInterface {
             id uuid PRIMARY KEY,
             alternativeid bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
             address_id uuid UNIQUE,
+            main_payment_card_id uuid UNIQUE,
 
             name varchar(100) NOT NULL,
             surname varchar(100) NOT NULL,

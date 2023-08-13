@@ -10,6 +10,7 @@ import { tokenConfiguration } from './config/tokenConfig';
 import { CustomerModule } from './customer/customer.module';
 import { AddressModule } from './address/address.module';
 import { LeadModule } from './lead/lead.module';
+import { PaymentCardModule } from './payment-card/payment-card.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { LeadModule } from './lead/lead.module';
     CustomerModule,
     AddressModule,
     LeadModule,
+    PaymentCardModule,
   ],
 })
 export class AppModule {}

@@ -7,11 +7,12 @@ import {
 import { CreateLeadDto } from '../dto/create-lead.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LeadEntity } from '../entities/lead.entity';
-import { DeepPartial, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { LeadExceptionEnum } from '../exceptions/lead.exceptions';
 import { LeadDataDto } from '../dto/lead-data.dto';
 import { ExceptionConstants } from '~/common-util/exceptions-constants';
 import { GetLeadDto } from '../dto/get-lead.dto';
+import { CustomerEntity } from '~/customer/entities/customer.entity';
 
 @Injectable()
 export class LeadService {
@@ -93,5 +94,14 @@ export class LeadService {
     this.logger.debug('Data after merge -> ' + JSON.stringify(leadEntity.data));
 
     return leadEntity;
+  }
+
+  async convertLeadIntoCustomer(leadId: string) {
+    this.logger.debug('Get Lead data json');
+    this.logger.debug('Create Customer');
+    this.logger.debug('Create Address');
+
+    this.logger.debug('Fill customerId on Lead');
+    this.logger.debug('RETURN CustomerID');
   }
 }
