@@ -1,4 +1,4 @@
-import { BaseDto } from '~/common-util/base-dto';
+import { BaseDto } from '~/Domains/common-util/base-dto';
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';

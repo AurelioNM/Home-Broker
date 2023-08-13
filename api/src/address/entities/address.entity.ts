@@ -1,5 +1,5 @@
 import { Column, Entity, Index } from 'typeorm';
-import { BaseEntity } from '~/common-util/base.entity';
+import { BaseEntity } from '~/Domains/common-util/base.entity';
 
 @Index('pk_address', ['id'], { unique: true })
 @Entity('address', { schema: 'public' })
