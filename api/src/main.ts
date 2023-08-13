@@ -5,10 +5,10 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { AllExceptionsFilter } from '~/Domains/common-util/all-exceptions-filter';
+import { AllExceptionsFilter } from '~/Common/all-exceptions-filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
-import { TransformInterceptor } from './Domains/common-util/transform.interceptor';
+import { TransformInterceptor } from './Common/transform.interceptor';
 
 async function bootstrap() {
   const port = process.env.PORT;

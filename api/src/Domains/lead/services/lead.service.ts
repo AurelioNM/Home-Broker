@@ -10,7 +10,7 @@ import { LeadEntity } from '../entities/lead.entity';
 import { Repository } from 'typeorm';
 import { LeadExceptionEnum } from '../exceptions/lead.exceptions';
 import { LeadDataDto } from '../dto/lead-data.dto';
-import { ExceptionConstants } from '~/Domains/common-util/exceptions-constants';
+import { ExceptionConstants } from '~/Common/exceptions-constants';
 import { GetLeadDto } from '../dto/get-lead.dto';
 import { CustomerEntity } from '~/Domains/customer/entities/customer.entity';
 

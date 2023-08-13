@@ -12,8 +12,8 @@ import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { LeadExceptionEnum } from '~/Domains/lead/exceptions/lead.exceptions';
 import { CreateLeadDto } from '~/Domains/lead/dto/create-lead.dto';
 import { LeadDataDto } from '~/Domains/lead/dto/lead-data.dto';
-import { generateUUID } from '~/Domains/common-util/uuid';
-import { ExceptionConstants } from '~/Domains/common-util/exceptions-constants';
+import { generateUUID } from '~/Common/uuid';
+import { ExceptionConstants } from '~/Common/exceptions-constants';
 
 describe('LeadService - test', () => {
   let leadService: LeadService;

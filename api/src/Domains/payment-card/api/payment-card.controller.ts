@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { Response } from '~/Domains/common-util/factory-response';
+import { Response } from '~/Common/factory-response';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { PaymentCardService } from '../services/payment-card.service';
 import { MakePaymentDto } from '../dto/make-payment-dto.dto';

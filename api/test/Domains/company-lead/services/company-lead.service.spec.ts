@@ -7,7 +7,7 @@ import {
   mockOneCompanyLead,
   mockOneCompanyLeadDto,
 } from '../factory/company-lead.factory';
-import { generateUUID } from '~/Domains/common-util/uuid';
+import { generateUUID } from '~/Common/uuid';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { CompanyLeadExceptionEnum } from '~/Domains/company-lead/exceptions/company-lead.exceptions';
 import { CompanyLeadDto } from '~/Domains/company-lead/dto/company-lead-dto';

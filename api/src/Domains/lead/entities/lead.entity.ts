@@ -1,5 +1,5 @@
 import { Column, Entity, Index, JoinColumn, OneToOne } from 'typeorm';
-import { BaseEntity } from '~/Domains/common-util/base.entity';
+import { BaseEntity } from '~/Common/base.entity';
 import { CustomerEntity } from '~/Domains/customer/entities/customer.entity';
 import { LeadDataDto } from '../dto/lead-data.dto';
 

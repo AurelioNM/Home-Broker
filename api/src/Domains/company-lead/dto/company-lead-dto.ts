@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import { IsNotEmpty, IsString } from 'class-validator';
-import { BaseDto } from '~/Domains/common-util/base-dto';
+import { BaseDto } from '~/Common/base-dto';
 
 export class CompanyLeadDto extends BaseDto {
   @ApiProperty({ example: 'Fake Company' })

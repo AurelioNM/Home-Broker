@@ -1,4 +1,4 @@
-import { generateUUID } from '~/Domains/common-util/uuid';
+import { generateUUID } from '~/Common/uuid';
 import { CreateLeadDto } from '~/Domains/lead/dto/create-lead.dto';
 import { GetLeadDto } from '~/Domains/lead/dto/get-lead.dto';
 import { LeadDataDto } from '~/Domains/lead/dto/lead-data.dto';

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
-import { AddressDto } from '~/address/dto/address.dto';
+import { AddressDto } from '~/Domains/address/dto/address.dto';
 
 export class LeadDataDto {
   @ApiProperty({ example: 'name' })

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import { IsObject, IsUUID } from 'class-validator';
-import { BaseDto } from '~/Domains/common-util/base-dto';
+import { BaseDto } from '~/Common/base-dto';
 import { LeadDataDto } from './lead-data.dto';
 
 export class GetLeadDto extends BaseDto {

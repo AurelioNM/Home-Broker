@@ -1,4 +1,4 @@
-import { BaseEntity } from '~/Domains/common-util/base.entity';
+import { BaseEntity } from '~/Common/base.entity';
 import { Column, Entity, Index } from 'typeorm';
 
 @Index('pk_companyleads', ['id'], { unique: true })

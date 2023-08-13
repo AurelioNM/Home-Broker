@@ -3,7 +3,7 @@ import { CompanyLeadDto } from '~/Domains/company-lead/dto/company-lead-dto';
 import { CompanyLeadController } from '~/Domains/company-lead/api/company-lead.controller';
 import { CompanyLeadEntity } from '~/Domains/company-lead/entities/company-lead.entity';
 import { CompanyLeadService } from '~/Domains/company-lead/services/company-lead.service';
-import { Response } from '~/Domains/common-util/factory-response';
+import { Response } from '~/Common/factory-response';
 import { mockListCompanyLeadEntity } from '../factory/company-lead.factory';
 
 describe('CompanyLeadController - Test', () => {

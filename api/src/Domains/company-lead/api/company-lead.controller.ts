@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { CompanyLeadService } from '../services/company-lead.service';
 import { CompanyLeadDto } from '../dto/company-lead-dto';
-import { Response } from '~/Domains/common-util/factory-response';
+import { Response } from '~/Common/factory-response';
 import { AuthAuthenticated } from '~/Auth/decorators/auth-authenticated.decorators';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 

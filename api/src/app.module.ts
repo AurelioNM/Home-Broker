@@ -8,7 +8,7 @@ import { AuthModule } from './Auth/authy.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import { tokenConfiguration } from './Config/tokenConfig';
 import { CustomerModule } from './Domains/customer/customer.module';
-import { AddressModule } from './address/address.module';
+import { AddressModule } from './Domains/address/address.module';
 import { LeadModule } from './Domains/lead/lead.module';
 import { PaymentCardModule } from './Domains/payment-card/payment-card.module';
 

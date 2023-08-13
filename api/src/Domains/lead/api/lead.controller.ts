@@ -7,7 +7,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { Response } from '~/Domains/common-util/factory-response';
+import { Response } from '~/Common/factory-response';
 import { AuthAuthenticated } from '~/Auth/decorators/auth-authenticated.decorators';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { LeadService } from '../services/lead.service';
