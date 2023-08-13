@@ -15,7 +15,7 @@ export default () => {
     password: process.env.DB_PASS || dbConfig.password,
     database: process.env.DB_NAME || dbConfig.database,
     entities: [`${__dirname}/../**/*.entity.{js,ts}`],
-    migrations: [`${__dirname}/../migrations/*.{js,ts}`],
+    migrations: [`${__dirname}/../Database/migrations/*.{js,ts}`],
     logging: false,
     synchronize: false,
   });

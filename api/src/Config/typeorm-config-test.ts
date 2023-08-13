@@ -13,13 +13,13 @@ export default () =>
     password: dbConfig.password,
     database: dbConfig.database,
     entities: [`${__dirname}/../**/*.entity.{js,ts}`],
-    migrations: [`${__dirname}/../migrations/*.{js,ts}`],
+    migrations: [`${__dirname}/../Database/migrations/*.{js,ts}`],
     dropSchema: true, // drop schema makes database clean every connection
     migrationsRun: true,
     synchronize: false,
     keepConnectionAlive: true,
     logging: false,
     cli: {
-      migrationsDir: `${__dirname}/../migrations`,
+      migrationsDir: `${__dirname}/../Database/migrations`,
     },
   };

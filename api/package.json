@@ -25,7 +25,7 @@
     "migration-dev:run": "NODE_ENV=development yarn typeorm migration:run",
     "migration-dev:revert": "NODE_ENV=development yarn typeorm migration:revert",
     "migration-dev:create": "NODE_ENV=development yarn typeorm-ts-node-commonjs migration:create",
-    "typeorm": "typeorm-ts-node-commonjs -d src/config/typeorm-execute-migration.config.command.ts"
+    "typeorm": "typeorm-ts-node-commonjs -d src/Config/typeorm-execute-migration.config.command.ts"
   },
   "dependencies": {
     "@fastify/basic-auth": "5.0.0",
