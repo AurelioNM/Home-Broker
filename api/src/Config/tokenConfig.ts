@@ -1,7 +1,7 @@
 ﻿import { CacheStore, CacheStoreFactory } from '@nestjs/common';
 import { ConfigService, registerAs } from '@nestjs/config';
 import * as redisStore from 'cache-manager-redis-store';
-import { getSecondsFromExpireString } from '~/common-util/get-seconds-from-expire-string';
+import { getSecondsFromExpireString } from '~/Common/get-seconds-from-expire-string';
 
 interface tokenConfig {
   port: string;
