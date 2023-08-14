@@ -8,9 +8,9 @@ import {
   mockOneGetLeadDto,
   mockOneLeadEntity,
 } from '../factory/lead.factory';
-import { CreateLeadDto } from '~/Controllers/lead/dtos/create-lead.dto';
-import { GetLeadDto } from '~/Controllers/lead/dtos/get-lead.dto';
-import { LeadDataDto } from '~/Controllers/lead/dtos/lead-data.dto';
+import { CreateLeadDto } from '~/UseCases/lead-registration/api/dtos/create-lead.dto';
+import { GetLeadDto } from '~/UseCases/lead-registration/api/dtos/get-lead.dto';
+import { LeadDataDto } from '~/UseCases/lead-registration/api/dtos/lead-data.dto';
 
 describe('LeadDto Controller - Test', () => {
   let leadController: LeadController;

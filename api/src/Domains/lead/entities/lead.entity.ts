@@ -1,7 +1,7 @@
 import { Column, Entity, Index, JoinColumn, OneToOne } from 'typeorm';
 import { BaseEntity } from '~/Common/base.entity';
 import { CustomerEntity } from '~/Domains/customer/entities/customer.entity';
-import { LeadDataDto } from '../../../Controllers/lead/dtos/lead-data.dto';
+import { LeadDataDto } from '../../../UseCases/lead-registration/api/dtos/lead-data.dto';
 
 @Index('pk_leads', ['id'], { unique: true })
 @Entity('leads', { schema: 'public' })

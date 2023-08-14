@@ -10,8 +10,8 @@ import {
 } from '../factory/lead.factory';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { LeadExceptionEnum } from '~/Domains/lead/exceptions/lead.exceptions';
-import { CreateLeadDto } from '~/Controllers/lead/dtos/create-lead.dto';
-import { LeadDataDto } from '~/Controllers/lead/dtos/lead-data.dto';
+import { CreateLeadDto } from '~/UseCases/lead-registration/api/dtos/create-lead.dto';
+import { LeadDataDto } from '~/UseCases/lead-registration/api/dtos/lead-data.dto';
 import { generateUUID } from '~/Common/uuid';
 import { ExceptionConstants } from '~/Common/exceptions-constants';
 

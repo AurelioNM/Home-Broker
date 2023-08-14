@@ -11,9 +11,9 @@ import { Response } from '~/Common/factory-response';
 import { AuthAuthenticated } from '~/Auth/decorators/auth-authenticated.decorators';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { LeadService } from '../../Domains/lead/services/lead.service';
-import { CreateLeadDto } from './dtos/create-lead.dto';
-import { GetLeadDto } from './dtos/get-lead.dto';
-import { LeadDataDto } from './dtos/lead-data.dto';
+import { CreateLeadDto } from '../../UseCases/lead-registration/api/dtos/create-lead.dto';
+import { GetLeadDto } from '../../UseCases/lead-registration/api/dtos/get-lead.dto';
+import { LeadDataDto } from '../../UseCases/lead-registration/api/dtos/lead-data.dto';
 
 // @AuthAuthenticated()
 @ApiTags('lead')
