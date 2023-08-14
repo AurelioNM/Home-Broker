@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { LeadController } from '~/Domains/lead/api/lead.controller';
+import { LeadController } from '~/Controllers/lead/lead.controller';
 import { LeadEntity } from '~/Domains/lead/entities/lead.entity';
 import { LeadService } from '~/Domains/lead/services/lead.service';
 import {
@@ -8,9 +8,9 @@ import {
   mockOneGetLeadDto,
   mockOneLeadEntity,
 } from '../factory/lead.factory';
-import { CreateLeadDto } from '~/Domains/lead/dto/create-lead.dto';
-import { GetLeadDto } from '~/Domains/lead/dto/get-lead.dto';
-import { LeadDataDto } from '~/Domains/lead/dto/lead-data.dto';
+import { CreateLeadDto } from '~/Controllers/lead/dtos/create-lead.dto';
+import { GetLeadDto } from '~/Controllers/lead/dtos/get-lead.dto';
+import { LeadDataDto } from '~/Controllers/lead/dtos/lead-data.dto';
 
 describe('LeadDto Controller - Test', () => {
   let leadController: LeadController;

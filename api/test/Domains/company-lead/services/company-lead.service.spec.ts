@@ -10,7 +10,7 @@ import {
 import { generateUUID } from '~/Common/uuid';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { CompanyLeadExceptionEnum } from '~/Domains/company-lead/exceptions/company-lead.exceptions';
-import { CompanyLeadDto } from '~/Domains/company-lead/dto/company-lead-dto';
+import { CompanyLeadDto } from '~/Controllers/company-lead/dtos/company-lead-dto';
 
 describe('CompanyLeadService - test', () => {
   let companyLeadService: CompanyLeadService;

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CompanyLeadDto } from '~/Domains/company-lead/dto/company-lead-dto';
-import { CompanyLeadController } from '~/Domains/company-lead/api/company-lead.controller';
+import { CompanyLeadDto } from '~/Controllers/company-lead/dtos/company-lead-dto';
+import { CompanyLeadController } from '~/Controllers/company-lead/company-lead.controller';
 import { CompanyLeadEntity } from '~/Domains/company-lead/entities/company-lead.entity';
 import { CompanyLeadService } from '~/Domains/company-lead/services/company-lead.service';
 import { Response } from '~/Common/factory-response';

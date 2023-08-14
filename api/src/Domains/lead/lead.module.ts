@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { LeadService } from './services/lead.service';
-import { LeadController } from './api/lead.controller';
+import { LeadController } from '~/Controllers/lead/lead.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LeadEntity } from './entities/lead.entity';
 

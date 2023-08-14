@@ -1,13 +1,10 @@
-import {
-  Injectable,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PaymentCardEntity } from '../entities/payment_card.entity';
-import { MakePaymentDto } from '../dto/make-payment-dto.dto';
-import { PaymentResponseDto } from '../dto/payment-response.dto';
-import { PaymentCardDto } from '../dto/payment-card.dto';
+import { MakePaymentDto } from '../../../Controllers/payment-card/dtos/make-payment-dto.dto';
+import { PaymentResponseDto } from '../../../Controllers/payment-card/dtos/payment-response.dto';
+import { PaymentCardDto } from '../../../Controllers/payment-card/dtos/payment-card.dto';
 
 @Injectable()
 export class PaymentCardService {
@@ -18,13 +15,17 @@ export class PaymentCardService {
 
   private readonly logger = new Logger(PaymentCardService.name);
 
-  async makePayment(makePaymentDto: MakePaymentDto): Promise<PaymentResponseDto> {
+  async makePayment(
+    makePaymentDto: MakePaymentDto,
+  ): Promise<PaymentResponseDto> {
     this.logger.log('MakePayment payload -> ' + JSON.stringify(makePaymentDto));
     this.validateCard(makePaymentDto.paymentCard);
 
     this.logger.log('Conver lead into customer');
     const paymentCardEntity = this.paymentCardRepository.create();
-    this.logger.log('Creating payment card -> ' + JSON.stringify(paymentCardEntity));
+    this.logger.log(
+      'Creating payment card -> ' + JSON.stringify(paymentCardEntity),
+    );
 
     // await this.paymentCardRepository.save(paymentCardEntity);
     return new PaymentResponseDto();

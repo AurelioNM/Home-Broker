@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PaymentCardController } from './api/payment-card.controller';
+import { PaymentCardController } from '../../Controllers/payment-card/payment-card.controller';
 import { PaymentCardService } from './services/payment-card.service';
 import { PaymentCardEntity } from './entities/payment_card.entity';
 

@@ -2,7 +2,7 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, UpdateResult } from 'typeorm';
 import { AddressEntity } from '../entities/address.entity';
-import { AddressDto } from '../dto/address.dto';
+import { AddressDto } from '../../../Controllers/customer/dtos/address.dto';
 
 @Injectable()
 export class AddressService {

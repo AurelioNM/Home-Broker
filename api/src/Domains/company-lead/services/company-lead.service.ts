@@ -7,7 +7,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyLeadEntity } from '../entities/company-lead.entity';
 import { Repository, UpdateResult } from 'typeorm';
-import { CompanyLeadDto } from '../dto/company-lead-dto';
+import { CompanyLeadDto } from '../../../Controllers/company-lead/dtos/company-lead-dto';
 import { CompanyLeadExceptionEnum } from '../exceptions/company-lead.exceptions';
 
 @Injectable()

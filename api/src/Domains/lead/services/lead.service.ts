@@ -4,14 +4,14 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateLeadDto } from '../dto/create-lead.dto';
+import { CreateLeadDto } from '../../../Controllers/lead/dtos/create-lead.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LeadEntity } from '../entities/lead.entity';
 import { Repository } from 'typeorm';
 import { LeadExceptionEnum } from '../exceptions/lead.exceptions';
-import { LeadDataDto } from '../dto/lead-data.dto';
+import { LeadDataDto } from '../../../Controllers/lead/dtos/lead-data.dto';
 import { ExceptionConstants } from '~/Common/exceptions-constants';
-import { GetLeadDto } from '../dto/get-lead.dto';
+import { GetLeadDto } from '../../../Controllers/lead/dtos/get-lead.dto';
 import { CustomerEntity } from '~/Domains/customer/entities/customer.entity';
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { CompanyLeadDto } from '~/Domains/company-lead/dto/company-lead-dto';
+import { CompanyLeadDto } from '~/Controllers/company-lead/dtos/company-lead-dto';
 import { CompanyLeadEntity } from '~/Domains/company-lead/entities/company-lead.entity';
 
 export const mockOneCompanyLead = (): CompanyLeadEntity => {

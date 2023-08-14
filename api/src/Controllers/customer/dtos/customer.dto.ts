@@ -1,55 +1,56 @@
+import { BaseDto } from '~/Common/base-dto';
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
-import { AddressDto } from '~/Domains/address/dto/address.dto';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { AddressDto } from '~/Controllers/customer/dtos/address.dto';
 
-export class LeadDataDto {
+export class CustomerDto extends BaseDto {
   @ApiProperty({ example: 'name' })
   @Expose()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  name?: string;
+  name: string;
 
   @ApiProperty({ example: 'surname' })
   @Expose()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  surname?: string;
+  surname: string;
 
   @ApiProperty({ example: 'cpf' })
   @Expose()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  cpf?: string;
+  cpf: string;
 
   @ApiProperty({ example: 'email' })
   @Expose()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  email?: string;
+  email: string;
 
   @ApiProperty({ example: 'password' })
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  password?: string;
+  password: string;
 
   @ApiProperty({ example: 'birth_date' })
   @Expose()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  birth_date?: Date;
+  birth_date: Date;
 
   @ApiProperty({ example: 'occupation' })
   @Expose()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  occupation?: string;
+  occupation: string;
 
   @ApiProperty({ example: 'monthly_income' })
   @Expose()
-  @IsOptional()
+  @IsNotEmpty()
   @IsNumber()
-  monthly_income?: number;
+  monthly_income: number;
 
   @ApiProperty({
     example: {

@@ -10,10 +10,10 @@ import {
 import { Response } from '~/Common/factory-response';
 import { AuthAuthenticated } from '~/Auth/decorators/auth-authenticated.decorators';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { LeadService } from '../services/lead.service';
-import { CreateLeadDto } from '../dto/create-lead.dto';
-import { GetLeadDto } from '../dto/get-lead.dto';
-import { LeadDataDto } from '../dto/lead-data.dto';
+import { LeadService } from '../../Domains/lead/services/lead.service';
+import { CreateLeadDto } from './dtos/create-lead.dto';
+import { GetLeadDto } from './dtos/get-lead.dto';
+import { LeadDataDto } from './dtos/lead-data.dto';
 
 // @AuthAuthenticated()
 @ApiTags('lead')

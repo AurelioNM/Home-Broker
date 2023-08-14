@@ -1,7 +1,7 @@
 import { generateUUID } from '~/Common/uuid';
-import { CreateLeadDto } from '~/Domains/lead/dto/create-lead.dto';
-import { GetLeadDto } from '~/Domains/lead/dto/get-lead.dto';
-import { LeadDataDto } from '~/Domains/lead/dto/lead-data.dto';
+import { CreateLeadDto } from '~/Controllers/lead/dtos/create-lead.dto';
+import { GetLeadDto } from '~/Controllers/lead/dtos/get-lead.dto';
+import { LeadDataDto } from '~/Controllers/lead/dtos/lead-data.dto';
 import { LeadEntity } from '~/Domains/lead/entities/lead.entity';
 
 export const mockListGetLeadDto = (): GetLeadDto[] => {

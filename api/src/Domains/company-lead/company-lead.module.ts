@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CompanyLeadController } from './api/company-lead.controller';
+import { CompanyLeadController } from '../../Controllers/company-lead/company-lead.controller';
 import { CompanyLeadService } from './services/company-lead.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CompanyLeadEntity } from './entities/company-lead.entity';
