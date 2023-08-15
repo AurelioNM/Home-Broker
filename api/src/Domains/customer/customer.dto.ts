@@ -2,7 +2,7 @@ import { BaseDto } from '~/Common/base-dto';
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
-import { AddressDto } from '~/Controllers/customer/dtos/address.dto';
+import { AddressDto } from '~/Domains/address/address.dto';
 
 export class CustomerDto extends BaseDto {
   @ApiProperty({ example: 'name' })
