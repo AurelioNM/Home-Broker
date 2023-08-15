@@ -1,19 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { LeadController } from '~/Controllers/lead/lead.controller';
+import { LeadRegistrationController } from '~/UseCases/lead-registration/api/lead-registration.controller';
 import { LeadEntity } from '~/Domains/lead/entities/lead.entity';
 import { LeadService } from '~/Domains/lead/services/lead.service';
 import {
-  mockListGetLeadDto,
   mockOneCreateLeadDto,
-  mockOneGetLeadDto,
   mockOneLeadEntity,
 } from '../factory/lead.factory';
 import { CreateLeadDto } from '~/UseCases/lead-registration/api/dtos/create-lead.dto';
-import { GetLeadDto } from '~/UseCases/lead-registration/api/dtos/get-lead.dto';
-import { LeadDataDto } from '~/UseCases/lead-registration/api/dtos/lead-data.dto';
 
 describe('LeadDto Controller - Test', () => {
-  let leadController: LeadController;
+  let leadController: LeadRegistrationController;
   let spyLeadService: LeadService;
 
   const mockLeadService = {
@@ -25,7 +21,7 @@ describe('LeadDto Controller - Test', () => {
 
   beforeEach(async () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
-      controllers: [LeadController],
+      controllers: [LeadRegistrationController],
       providers: [
         LeadService,
         {
@@ -35,20 +31,8 @@ describe('LeadDto Controller - Test', () => {
       ],
     }).compile();
 
-    leadController = moduleRef.get<LeadController>(LeadController);
+    leadController = moduleRef.get<LeadRegistrationController>(LeadRegistrationController);
     spyLeadService = moduleRef.get<LeadService>(LeadService);
-  });
-
-  describe('@Get -> findAll', () => {
-    it('should return an array of Leads', async () => {
-      const leads: GetLeadDto[] = mockListGetLeadDto();
-      mockLeadService.findAll.mockReturnValue(leads);
-
-      const result = await leadController.findAll();
-
-      expect(result).toEqual(leads);
-      expect(spyLeadService.findAll).toHaveBeenCalled();
-    });
   });
 
   describe('@Get -> findById', () => {
@@ -58,7 +42,7 @@ describe('LeadDto Controller - Test', () => {
 
       mockLeadService.findById.mockReturnValue(lead);
 
-      const result = await leadController.findById(leadId);
+      const result = await leadController.getLeadById(leadId);
 
       expect(result).toEqual(lead);
       expect(spyLeadService.findById).toHaveBeenCalledWith(leadId);
@@ -72,7 +56,7 @@ describe('LeadDto Controller - Test', () => {
 
       mockLeadService.create.mockReturnValue(lead);
 
-      const result = await leadController.create(createLeadDto);
+      const result = await leadController.createLead(createLeadDto);
 
       expect(result).toEqual(lead);
       expect(spyLeadService.create).toHaveBeenCalledWith(createLeadDto);

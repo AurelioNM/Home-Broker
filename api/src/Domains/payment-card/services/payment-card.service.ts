@@ -2,9 +2,9 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PaymentCardEntity } from '../entities/payment_card.entity';
-import { MakePaymentDto } from '../../../Controllers/payment-card/dtos/make-payment-dto.dto';
-import { PaymentResponseDto } from '../../../Controllers/payment-card/dtos/payment-response.dto';
-import { PaymentCardDto } from '../../../Controllers/payment-card/dtos/payment-card.dto';
+import { MakePaymentDto } from '~/UseCases/pay-registration/api/dtos/make-payment-dto.dto';
+import { PaymentResponseDto } from '~/UseCases/pay-registration/api/dtos/payment-response.dto';
+import { PaymentCardDto } from '~/UseCases/pay-registration/api/dtos/payment-card.dto';
 
 @Injectable()
 export class PaymentCardService {
