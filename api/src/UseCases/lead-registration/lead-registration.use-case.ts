@@ -14,8 +14,13 @@ export class LeadRegistrationUseCase {
 
   private readonly logger = new Logger(LeadRegistrationUseCase.name);
 
+  async getAllLeadsInfo(): Promise<LeadEntity[]> {
+    this.logger.log('Getting all Leads info by id');
+    return await this.leadService.findAll();
+  }
+
   async getLeadInfoById(id: string): Promise<LeadEntity> {
-    this.logger.log('Getting Lead inof by id');
+    this.logger.log('Getting Lead info by id');
     return await this.leadService.findById(id);
   }
 
@@ -27,7 +32,7 @@ export class LeadRegistrationUseCase {
   }
 
   async updateLeadRegistration(id: string, leadDataDto: LeadDataDto): Promise<LeadEntity> {
-    this.logger.log('Updating Lead registration');
+    this.logger.log('Updating registration of Lead: ' + id);
     this.leadValidatorService.validateFieldsSize(leadDataDto);
 
     let leadEntity = await this.leadService.findById(id);

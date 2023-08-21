@@ -17,5 +17,5 @@ export class MakePaymentDto {
   @IsNotEmpty()
   @IsObject()
   @Type(() => PaymentCardDto)
-  paymentCard?: PaymentCardDto;
+  paymentCard: PaymentCardDto;
 }

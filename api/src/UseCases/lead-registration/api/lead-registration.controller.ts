@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { Response } from '~/Common/factory-response';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { LeadService } from '~/Domains/lead/services/lead.service';
 import { CreateLeadDto } from './dtos/create-lead.dto';
 import { GetLeadDto } from './dtos/get-lead.dto';
 import { LeadDataDto } from './dtos/lead-data.dto';
@@ -20,6 +19,14 @@ import { LeadRegistrationUseCase } from '../lead-registration.use-case';
 @Controller('lead')
 export class LeadRegistrationController {
   constructor(private readonly leadRegistrationUseCase: LeadRegistrationUseCase) {}
+
+
+  @ApiOkResponse({ type: GetLeadDto, isArray: true })
+  @Get()
+  async findAll(): Promise<GetLeadDto[]> {
+    const leads = await this.leadRegistrationUseCase.getAllLeadsInfo();
+    return Response.factory(GetLeadDto, leads) as unknown as GetLeadDto[];
+  }
 
   @ApiOkResponse({ type: GetLeadDto })
   @Get(':id')

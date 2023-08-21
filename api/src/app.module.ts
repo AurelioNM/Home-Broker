@@ -3,7 +3,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import typeOrmConfigTest from './Config/typeorm-config-test';
 import typeOrmConfig from './Config/typeorm.config';
-import { CompanyLeadModule } from './Domains/company-lead/company-lead.module';
 import { AuthModule } from './Auth/authy.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import { tokenConfiguration } from './Config/tokenConfig';
@@ -24,11 +23,10 @@ import { PaymentCardModule } from './Domains/payment-card/payment-card.module';
     ),
     AuthModule,
     CacheModule.register(tokenConfiguration()),
-    CompanyLeadModule,
     CustomerModule,
     AddressModule,
     LeadModule,
-    PaymentCardModule,
+    // PaymentCardModule,
   ],
 })
 export class AppModule {}
