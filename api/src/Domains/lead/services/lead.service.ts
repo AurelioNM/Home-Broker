@@ -19,6 +19,10 @@ export class LeadService {
 
   private readonly logger = new Logger(LeadService.name);
 
+  async findAll(): Promise<LeadEntity[]> {
+    return this.leadRepository.find();
+  }
+
   async findById(id: string): Promise<LeadEntity> {
     const lead = await this.leadRepository.findOneBy({ id });
     if (!lead) {
@@ -45,15 +49,21 @@ export class LeadService {
     leadDataDto: LeadDataDto,
     leadEntity: LeadEntity,
   ): LeadEntity {
-    this.logger.debug('Current info -> ' + JSON.stringify(leadEntity.data));
-    this.logger.debug('Info to update -> ' + JSON.stringify(leadDataDto));
+    this.logger.debug('Current info: ' + JSON.stringify(leadEntity.data));
+    this.logger.debug('Info to update: ' + JSON.stringify(leadDataDto));
 
-    leadEntity.data = {
-      ...leadDataDto,
-      ...leadEntity.data,
-    };
-    this.logger.debug('Data after merge -> ' + JSON.stringify(leadEntity.data));
+    Object.keys(leadDataDto)
+      .filter(key => leadDataDto[key] !== undefined)
+      .forEach(key => {
+        leadEntity.data[key] = leadDataDto[key];
+      });
+
+    this.logger.debug('Data after merge: ' + JSON.stringify(leadEntity.data));
 
     return leadEntity;
+  }
+
+  async fillCustomerId(lead: LeadEntity, customerId: string) {
+    this.logger.debug('Fill customerId column on LeadEntity');
   }
 }

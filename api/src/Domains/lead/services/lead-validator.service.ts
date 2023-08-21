@@ -15,15 +15,17 @@ export class LeadValidatorService {
   private readonly logger = new Logger(LeadValidatorService.name);
 
   validateFieldsSize(leadDataDto: LeadDataDto): void {
-    this.logger.debug('Size of DTO: ' + Object.keys(leadDataDto));
-    if (Object.keys(leadDataDto).length == 0) {
+    const fieldsToUpdateSize = Object.keys(leadDataDto)
+      .filter(key => leadDataDto[key] !== undefined).length
+
+    if (fieldsToUpdateSize == 0) {
       this.logger.warn('No fields to update');
       throw new BadRequestException(ExceptionConstants.NO_FIELDS_TO_UPDATE);
     }
   }
 
   async validateIfEmailIsTaken(email: string): Promise<void> {
-    if (this.isEmailIsTaken(email)) {
+    if (await this.isEmailIsTaken(email)) {
       this.logger.warn('Email is taken -> ' + email);
       throw new BadRequestException(LeadExceptionEnum.LEAD_EMAIL_ALREADY_EXIST);
     }
@@ -37,6 +39,8 @@ export class LeadValidatorService {
       AND deleteddate IS NULL
       LIMIT 1;
     `);
+    this.logger.warn('Result: ' + JSON.stringify(result));
+    this.logger.warn('Return: ' + (result[0].count > 0));
     return result[0].count > 0;
   }
 }

@@ -26,7 +26,7 @@ import { PaymentCardModule } from './Domains/payment-card/payment-card.module';
     CustomerModule,
     AddressModule,
     LeadModule,
-    PaymentCardModule,
+    // PaymentCardModule,
   ],
 })
 export class AppModule {}
